@@ -60,7 +60,8 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("Cannot be an email.");
             }
           }
-        }
+        },
+        unique: true//???
       },
       email: {
         type: DataTypes.STRING,
@@ -68,7 +69,8 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [3, 256],
           isEmail: true
-        }
+        },
+        unique: true///???
       },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
