@@ -6,17 +6,12 @@ module.exports = {
     return queryInterface.bulkInsert("Bookings", [{
       spotId: 1,
       userId: 2,
-      startDate: "2021-11-19",
-      endDate: "2021-11-20"
+      startDate: Sequelize.literal('CURRENT_TIMESTAMP'),
+      endDate: Sequelize.literal('CURRENT_TIMESTAMP')
     }]);
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Bookings", [{
-      spotId: 1,
-      userId: 2,
-      startDate: "2021-11-19",
-      endDate: "2021-11-20"
-    }]);
+    return queryInterface.bulkDelete("Bookings");
   }
 };
