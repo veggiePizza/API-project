@@ -1,16 +1,24 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("SpotImages", [{
+    options.tableName = 'SpotImages';
+    return queryInterface.bulkInsert(options, [{
       url: "../image.png",
       preview: true,
       spotId: 1
-    }]);
+    }], {});
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("SpotImages");
+    options.tableName = 'SpotImages';
+    return queryInterface.bulkDelete(options, {}, {});
   }
 };
