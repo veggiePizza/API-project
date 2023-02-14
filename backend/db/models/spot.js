@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Spot.init({
     address: DataTypes.STRING,
     city: DataTypes.STRING,
+    state: DataTypes.STRING,
     country: DataTypes.STRING,
     lat: DataTypes.DECIMAL,
     lng: DataTypes.DECIMAL,
