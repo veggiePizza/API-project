@@ -13,6 +13,7 @@ module.exports = {
     return queryInterface.bulkInsert(options, [{
       address: "1542 Sedona Vortex",
       city: "Sedona",
+      state: "Arizona",
       country: "United States",
       lat: 36.36,
       lng: 68.72,
