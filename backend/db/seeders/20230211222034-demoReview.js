@@ -12,11 +12,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Reviews" ,[{
-      review: "This was an awesome spot!",
-      stars: 5,
-      userId: 1,
-      spotId: 1,
-    }]);
+    return queryInterface.bulkDelete("Reviews");
   }
 };
