@@ -13,6 +13,19 @@ router.put('/:id', async (req, res) => {
   const spot = await Spot.findAll({ where: { id: req.params.id } });
   if (spot) {
     await spot.update({address,city,state,country,lat,lng,name,description,price})
+    return res.status(200).json({message: "Successfully deleted"});
+  }
+  else {
+    return res.status(404).json({ message: "Spot couldn't be found" });
+  }
+
+});
+
+router.delete('/:id', async (req, res) => {
+  const spot = await Spot.findAll({ where: { id: req.params.id } });
+  if (spot) {
+    await spot.destroy();4
+    return res.status(200).json(newSpotImage);
   }
   else {
     return res.status(404).json({ message: "Spot couldn't be found" });
