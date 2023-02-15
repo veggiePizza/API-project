@@ -52,14 +52,14 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
-      firstName: {
+      /*firstName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
+      },*/
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
             }
           }
         },
-        unique: true//???
+        //unique: true//???
       },
       email: {
         type: DataTypes.STRING,
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 256],
           isEmail: true
         },
-        unique: true///???
+       // unique: true///???
       },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
