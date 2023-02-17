@@ -54,6 +54,19 @@ router.put('/:id', async (req, res) => {
     return res.status(404).json({ message: "Review couldn't be found" });
 });
 
+//Delete a Review
+router.delete('/:id', async (req, res) => {
+  const review = await Review.findAll({ where: { id: req.params.id } });
+  if (review) {
+    await review.destroy(); 
+    return res.status(200).json(review);
+  }
+  else {
+    return res.status(404).json({ message: "Review couldn't be found" });
+  }
+});
+
+
 router.get('/:id/images', async (req, res) => {
   const images = await ReviewImage.findAll();
   if (images) return res.status(200).json(images);
