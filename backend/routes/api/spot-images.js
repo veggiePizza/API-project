@@ -1,16 +1,13 @@
 const express = require('express');
 const { SpotImage } = require('../../db/models');
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth, authDeleteSpotImage } = require('../../utils/auth');
 const router = express.Router();
 
-//Delete a Spot Image---requires authorization
-router.delete('/:id', requireAuth, async (req, res) => {
-  const image = await SpotImage.findAll({ where: { id: req.params.id } });
-  if (image) {
+//Delete a Spot Image
+router.delete('/:id', requireAuth, authDeleteSpotImage, async (req, res) => {
+  const image = await SpotImage.findByPk(req.params.id);
     await image.destroy();
     return res.status(200).json({ message: "Successfully deleted" });
-  }
-  return res.status(404).json({ message: "Spot Image couldn't be found" });
 });
 
 module.exports = router;
