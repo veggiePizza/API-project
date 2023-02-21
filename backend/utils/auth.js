@@ -114,6 +114,7 @@ const authReview = async function (req, _res, next) {
     err.status = 403;
     return next(err);
   }
+
   const err = new Error("No Review")
   err.message = "Review couldn't be found";
   err.status = 404;
