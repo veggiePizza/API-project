@@ -76,7 +76,7 @@ module.exports = (sequelize, DataTypes) => {
             }
           }
         },
-        //unique: true//???
+        unique: true
       },
       email: {
         type: DataTypes.STRING,
@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 256],
           isEmail: true
         },
-       // unique: true///???
+        unique: true
       },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
@@ -98,6 +98,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      indexes: [
+        {
+          unique: true,
+          fields: ['username','email'],
+        }
+      ],
       defaultScope: {
         attributes: {
           exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]

@@ -114,13 +114,14 @@ const authReview = async function (req, _res, next) {
     err.status = 403;
     return next(err);
   }
+
   const err = new Error("No Review")
   err.message = "Review couldn't be found";
   err.status = 404;
   return next(err);
 }
 
-const authDeleteSpotImage  = async function (req, res, next) {
+const authDeleteSpotImage = async function (req, res, next) {
   const spotImage = await SpotImage.findByPk(req.params.id);
   if (spotImage) {
     const spot = await Spot.findByPk(spotImage.spotId);
@@ -154,4 +155,29 @@ const authIsSpotNot = async function (req, _res, next) {
   return next(err);
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, authBooking, authDeleteBooking, authDeleteReviewImage, authReview, authDeleteSpotImage,  authIsSpot, authIsSpotNot  };
+const authUser = async function (req, res, next) {
+  const { email, username } = req.body;
+  checkUsername = await User.findOne({ where: { username } })
+  checkEmail = await User.findOne({ where: { email } })
+  if (!(checkUsername || checkEmail)) { return next(); }
+  else{
+    const errors = {};
+    if (checkEmail) errors["email"] = "User with that email already exists";
+    if (checkUsername) errors["username"] = "User with that username already exists";
+    res.status(403).json({ message: "User already exists", statusCode: 403, errors: errors })
+  }
+}
+
+module.exports = {
+  setTokenCookie,
+  restoreUser,
+  requireAuth,
+  authBooking,
+  authDeleteBooking,
+  authDeleteReviewImage,
+  authReview,
+  authDeleteSpotImage,
+  authIsSpot,
+  authIsSpotNot,
+  authUser
+};
