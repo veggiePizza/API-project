@@ -17,6 +17,7 @@ module.exports = {
       endDate: Sequelize.literal('CURRENT_TIMESTAMP')
     }], {});
   },
+  // Sequelize.literal('19960911')
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Bookings';
