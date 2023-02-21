@@ -1,28 +1,10 @@
 const express = require('express');
 const { Spot, Review, Booking, SpotImage, User, ReviewImage } = require('../../db/models');
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth, authIsSpot, authIsSpotNot } = require('../../utils/auth');
 const router = express.Router();
 var Sequelize = require("sequelize");
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
-const authIsSpot = async function (req, _res, next) {
-  const spot = await Spot.findByPk(req.params.id);
-  if (req.user.id == spot.ownerId) return next();
-  const err = new Error('Spot must belong to the current user');
-  err.message = 'Forbidden';
-  err.status = 403;
-  return next(err);
-}
-
-const authIsSpotNot = async function (req, _res, next) {
-  const spot = await Spot.findByPk(req.params.id);
-  if (req.user.id != spot.ownerId) return next();
-  const err = new Error('Spot must not belong to the current user');
-  err.message = 'Forbidden';
-  err.status = 403;
-  return next(err);
-}
 
 const validateSpot = [
   check('address')
@@ -55,6 +37,17 @@ const validateSpot = [
   check('price')
     .notEmpty()
     .withMessage('Price per day is required'),
+  handleValidationErrors
+];
+
+const validateReview = [
+  check('review')
+    .notEmpty()
+    .withMessage('Review text is required'),
+  check('stars')
+    .notEmpty()
+    .isInt({max: 5 , min:1})
+    .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
 
@@ -115,17 +108,13 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 //Add an Image to a Spot based on the Spot's id
 router.post('/:id/images', requireAuth, authIsSpot, async (req, res) => {
   const { url, preview } = req.body;
-  const spot = await Spot.findAll({ where: { id: req.params.id } });
-  if (spot) {
-    const newSpotImage = await SpotImage.create({ url, preview, spotId: spot.id })
-    if (newSpotImage) return res.status(200).json(newSpotImage);
-    return res.status(404).json({ message: "Image was not created" });
-  }
-  return res.status(404).json({ message: "Spot couldn't be found" });
+  const spot = await Spot.findByPk(req.params.id);
+  const newSpotImage = await SpotImage.create({ url, preview, spotId: spot.id })
+  if (newSpotImage) return res.status(200).json({ id: newSpotImage.id, url: newSpotImage.url, preview: newSpotImage.preview });
 });
 
 //Edit a Spot
-router.put('/:id', requireAuth, authIsSpot, async (req, res) => {
+router.put('/:id', requireAuth, authIsSpot, validateSpot, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
   await Spot.update(
     { address, city, state, country, lat, lng, name, description, price },
@@ -159,7 +148,7 @@ router.get('/:id/reviews', requireAuth, async (req, res) => {
 });
 
 //Create a Review for a Spot based on the Spot's id
-router.post('/:id/reviews', requireAuth, async (req, res) => {
+router.post('/:id/reviews', requireAuth, validateReview, async (req, res) => {
   const { review, stars } = req.body;
   const { user } = req;
   const spot = await Spot.findByPk(req.params.id);
@@ -174,10 +163,10 @@ router.post('/:id/reviews', requireAuth, async (req, res) => {
 //Get all Bookings for a Spot based on the Spot's id
 router.get('/:id/bookings', requireAuth, async (req, res) => {
   const bookings = await Booking.findAll({ where: { spotId: req.params.id }, attributes: ['spotId', 'startDate', 'endDate'] });
-  if (bookings) return res.status(200).json({Bookings:bookings});
+  if (bookings) return res.status(200).json({ Bookings: bookings });
 });
 
-//Create a Booking from a Spot based on the Spot's id
+//Create a Booking from a Spot based on the Spot's id---Body validation
 router.post('/:id/bookings', requireAuth, authIsSpotNot, async (req, res) => {
   const { startDate, endDate } = req.body;
   const { user } = req;

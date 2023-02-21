@@ -20,7 +20,7 @@ router.use('/reviews', reviewsRouter);
 router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
 router.use((err, req, res, next) => {
-  res.json({message:err.message,status:err.status})
+  res.status(err.status).json({message:err.message,status:err.status})
 })
 
 module.exports = router;
