@@ -54,12 +54,12 @@ const validateReview = [
 //Get all Spots
 router.get('/', async (req, res) => {
   const spots = await Spot.findAll({
-    attributes: {
+    /*attributes: {
       include: [
         [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
         [Sequelize.col('url'), 'previewImage'],
       ]
-    },
+    },*/
     include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
     group: 'spot.id'
   });
