@@ -59,9 +59,9 @@ router.get('/', async (req, res) => {
         [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
         [Sequelize.col('url'), 'previewImage'],
       ]
-    },*/
+    }*/,
     include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
-    group: 'id'
+    group: 'Spot.id'
   });
   if (spots) return res.status(200).json(spots);
 });
