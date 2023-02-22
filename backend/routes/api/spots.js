@@ -6,6 +6,11 @@ var Sequelize = require("sequelize");
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+let schema;
+if (process.env.NODE_ENV === 'production'){
+  schema = process.env.SCHEMA;
+}
+
 const validateSpot = [
   check('address')
     .notEmpty()
