@@ -62,11 +62,11 @@ router.get('/', async (req, res) => {
     attributes: {
       include: [
         [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-        [Sequelize.literal(
+        /*[Sequelize.literal(
                     `(SELECT url FROM ${
                       schema ? `"${schema}"."SpotImages"` : 'SpotImages'
                     } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true ORDER BY "id" LIMIT 1)`
-                  ), 'previewImage'],
+                  ), 'previewImage'],*/
       ]
     },
     include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
