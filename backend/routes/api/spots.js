@@ -65,7 +65,7 @@ router.get('/', async (req, res) => {
         [Sequelize.literal(
                     `(SELECT url FROM ${
                       schema ? `"${schema}"."SpotImages"` : 'SpotImages'
-                    } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+                    } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true ORDER BY 'id' LIMIT 1)`
                   ), 'previewImage'],
       ]
     },
