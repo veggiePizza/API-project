@@ -70,6 +70,7 @@ router.get('/', async (req, res) => {
       ]
     },
     include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
+    group: "spot.id",
   });
   if (spots) return res.status(200).json(spots);
 });
