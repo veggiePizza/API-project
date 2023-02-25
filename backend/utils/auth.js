@@ -139,33 +139,68 @@ const authDeleteSpotImage = async function (req, res, next) {
 
 const authIsSpot = async function (req, _res, next) {
   const spot = await Spot.findByPk(req.params.id);
-  if (req.user.id == spot.ownerId) return next();
-  const err = new Error('Spot must belong to the current user');
-  err.message = 'Forbidden';
-  err.status = 403;
+  if (spot) {
+    if (req.user.id == spot.ownerId) return next();
+    const err = new Error('Spot must belong to the current user');
+    err.message = 'Forbidden';
+    err.status = 403;
+    return next(err);
+  }
+
+  const err = new Error("No Spot")
+  err.message = "Spot couldn't be found";
+  err.status = 404;
   return next(err);
 }
 
 const authIsSpotNot = async function (req, _res, next) {
   const spot = await Spot.findByPk(req.params.id);
-  if (req.user.id != spot.ownerId) return next();
-  const err = new Error('Spot must not belong to the current user');
-  err.message = 'Forbidden';
-  err.status = 403;
+  if (spot) {
+    if (req.user.id != spot.ownerId) return next();
+    const err = new Error('Spot must not belong to the current user');
+    err.message = 'Forbidden';
+    err.status = 403;
+    return next(err);
+  }
+
+  const err = new Error("No Spot")
+  err.message = "Spot couldn't be found";
+  err.status = 404;
   return next(err);
 }
 
-const authUser = async function (req, res, next) {
+const authUser = async function (req, res, next) {////check my errors
   const { email, username } = req.body;
   checkUsername = await User.findOne({ where: { username } })
   checkEmail = await User.findOne({ where: { email } })
   if (!(checkUsername || checkEmail)) { return next(); }
-  else{
+  else {
     const errors = {};
     if (checkEmail) errors["email"] = "User with that email already exists";
     if (checkUsername) errors["username"] = "User with that username already exists";
-    res.status(403).json({ message: "User already exists", statusCode: 403, errors: errors })
+    return res.status(403).json({ message: "User already exists", statusCode: 403, errors: errors })
   }
+}
+
+const bookingConflict = async function (req, res, next) {
+  const { startDate, endDate } = req.body;
+  bookings = await Booking.findAll({ where: { spotId: req.params.id } });
+  start = new Date(startDate);
+  end = new Date(endDate);
+  const errors = {};
+
+  bookings.forEach(el => {
+    bookedStart = new Date(el.startDate);
+    bookedEnd = new Date(el.endDate);
+
+    if (start >= bookedStart && start <= bookedEnd)
+      errors["startDate"] = "Start date conflicts with an existing booking";
+    if (end >= bookedStart && end <= bookedEnd)
+      errors["endDate"] = "End date conflicts with an existing booking";
+  });
+
+  if (Object.keys(errors).length === 0) return next();
+  return res.status(403).json({ message: "Sorry, this spot is already booked for the specified dates", statusCode: 403, errors: errors }) 
 }
 
 module.exports = {
@@ -179,5 +214,6 @@ module.exports = {
   authDeleteSpotImage,
   authIsSpot,
   authIsSpotNot,
-  authUser
+  authUser,
+  bookingConflict
 };

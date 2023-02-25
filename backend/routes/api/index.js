@@ -19,8 +19,9 @@ router.use('/bookings', bookingsRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
-/*router.use((err, req, res, next) => {
+router.use((err, req, res, next) => {
+  if(err.errors)  res.status(err.status).json({message:err.message,status:err.status,errors:err.errors})
   res.status(err.status).json({message:err.message,status:err.status})
-})*/
+})
 
 module.exports = router;
