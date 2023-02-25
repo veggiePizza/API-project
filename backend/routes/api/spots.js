@@ -1,6 +1,6 @@
 const express = require('express');
 const { Spot, Review, Booking, SpotImage, User, ReviewImage } = require('../../db/models');
-const { requireAuth, authIsSpot, authIsSpotNot } = require('../../utils/auth');
+const { requireAuth, authIsSpot, authIsSpotNot, bookingConflict } = require('../../utils/auth');
 const router = express.Router();
 var Sequelize = require("sequelize");
 const { check } = require('express-validator');
@@ -56,21 +56,30 @@ const validateReview = [
   handleValidationErrors
 ];
 
+const validateDate = [
+    check('endDate').custom((value, { req }) => {
+      if (new Date(value) > new Date(req.body.startDate)) return true;
+      return false;
+  })
+  .withMessage('endDate cannot be on or before startDate'),
+  handleValidationErrors
+];
+
 //Get all Spots
 router.get('/', async (req, res) => {
   const spots = await Spot.findAll({
     attributes: {
       include: [
         [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-        /*[Sequelize.literal(
+        [Sequelize.literal(
                     `(SELECT url FROM ${
                       schema ? `"${schema}"."SpotImages"` : 'SpotImages'
-                    } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true ORDER BY "id" LIMIT 1)`
-                  ), 'previewImage'],*/
+                    } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+                  ), 'previewImage'],
       ]
     },
     include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
-    //group: "spot.id",
+    group: "Spot.id",
   });
   if (spots) return res.status(200).json(spots);
 });
@@ -176,7 +185,7 @@ router.get('/:id/bookings', requireAuth, async (req, res) => {
 });
 
 //Create a Booking from a Spot based on the Spot's id---Body validation
-router.post('/:id/bookings', requireAuth, authIsSpotNot, async (req, res) => {
+router.post('/:id/bookings', requireAuth, authIsSpotNot, validateDate, bookingConflict, async (req, res) => {
   const { startDate, endDate } = req.body;
   const { user } = req;
   const spot = await Spot.findByPk(req.params.id);
