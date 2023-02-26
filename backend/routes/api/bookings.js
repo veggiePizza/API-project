@@ -22,7 +22,7 @@ router.get('/current', requireAuth, async (req, res) => {
     attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
     include: [{ model: Spot, attributes: { exclude: ['createdAt', 'updatedAt', 'description'] } }],
   });
-  if (bookings) return res.status(200).json(bookings);
+  if (bookings) return res.status(200).json({Bookings: bookings});
   return res.status(404).json({ message: "Bookings couldn't be found", status: 404 })
 });
 

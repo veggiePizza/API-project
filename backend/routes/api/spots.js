@@ -240,7 +240,7 @@ router.get('/:id/reviews', requireAuth, async (req, res) => {
         { model: ReviewImage, attributes: ['id', 'url'] }
       ],
     });
-    return res.status(200).json(reviews);
+    return res.status(200).json({Reviews: reviews});
   }
   else res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 });
 });
