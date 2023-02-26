@@ -22,10 +22,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Users' },
+        onDelete: 'CASCADE'
       },
       spotId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Spots' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

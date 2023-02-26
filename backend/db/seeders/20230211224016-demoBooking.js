@@ -13,11 +13,22 @@ module.exports = {
     return queryInterface.bulkInsert(options, [{
       spotId: 1,
       userId: 2,
-      startDate: Sequelize.literal('CURRENT_TIMESTAMP'),
-      endDate: Sequelize.literal('CURRENT_TIMESTAMP')
+      startDate: Sequelize.literal('2015-02-01'),
+      endDate: Sequelize.literal('2015-02-01')
+    },
+    {
+      spotId: 1,
+      userId: 3,
+      startDate: Sequelize.literal('2017-02-01'),
+      endDate: Sequelize.literal('2017-02-12')
+    },
+    {
+      spotId: 2,
+      userId: 3,
+      startDate: Sequelize.literal('2016-02-01'),
+      endDate: Sequelize.literal('2016-02-12')
     }], {});
   },
-  // Sequelize.literal('19960911')
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Bookings';

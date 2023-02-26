@@ -75,7 +75,13 @@ const authBooking = async function (req, res, next) {
 
 const authDeleteBooking = async function (req, res, next) {
   const booking = await Booking.findByPk(req.params.id);
+ 
   if (booking) {
+    today = new Date()
+    start = new Date(booking.startDate)
+    if (today > start) 
+      return res.status(403).json({ message: "Bookings that have been started can't be deleted", statusCode: 403 })
+    
     const spot = await Spot.findByPk(booking.spotId);
     if (req.user.id == booking.userId || req.user.id == spot.ownerId) return next();
     const err = new Error("Booking or Spot must belong to the current user")
@@ -131,6 +137,7 @@ const authDeleteSpotImage = async function (req, res, next) {
     err.status = 403;
     return next(err);
   }
+  
   const err = new Error("No Spot Image")
   err.message = "Spot Image couldn't be found";
   err.status = 404;
@@ -200,7 +207,33 @@ const bookingConflict = async function (req, res, next) {
   });
 
   if (Object.keys(errors).length === 0) return next();
-  return res.status(403).json({ message: "Sorry, this spot is already booked for the specified dates", statusCode: 403, errors: errors }) 
+  return res.status(403).json({ message: "Sorry, this spot is already booked for the specified dates", statusCode: 403, errors: errors })
+}
+
+const bookingConflict2 = async function (req, res, next) {
+  const { startDate, endDate } = req.body;
+  booking = await Booking.findByPk(req.params.id);
+  bookings = await Booking.findAll({ where: { spotId: booking.spotId } });
+  start = new Date(startDate);
+  end = new Date(endDate);
+  today = new Date();
+  if (start > today)
+    return res.status(403).json({ message: "Past bookings can't be modified", statusCode: 403 })
+  
+  const errors = {};
+
+  bookings.forEach(el => {
+    bookedStart = new Date(el.startDate);
+    bookedEnd = new Date(el.endDate);
+
+    if (start >= bookedStart && start <= bookedEnd)
+      errors["startDate"] = "Start date conflicts with an existing booking";
+    if (end >= bookedStart && end <= bookedEnd)
+      errors["endDate"] = "End date conflicts with an existing booking";
+  });
+
+  if (Object.keys(errors).length === 0) return next();
+  return res.status(403).json({ message: "Sorry, this spot is already booked for the specified dates", statusCode: 403, errors: errors })
 }
 
 module.exports = {
@@ -215,5 +248,6 @@ module.exports = {
   authIsSpot,
   authIsSpotNot,
   authUser,
-  bookingConflict
+  bookingConflict,
+  bookingConflict2
 };

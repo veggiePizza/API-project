@@ -13,6 +13,14 @@ module.exports = {
     return queryInterface.bulkInsert(options, [{
       url: "../pic.png",
       reviewId:1
+    },
+    {
+      url: "../picOfPickles.png",
+      reviewId:2
+    },
+    {
+      url: "../picOfDogs.png",
+      reviewId:1
     }], {});
   },
 
