@@ -14,6 +14,16 @@ module.exports = {
       url: "../image.png",
       preview: true,
       spotId: 1
+    },
+    {
+      url: "../image.png",
+      preview: true,
+      spotId: 2
+    },
+    {
+      url: "../image.png",
+      preview: false,
+      spotId: 3
     }], {});
   },
 

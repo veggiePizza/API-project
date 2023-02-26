@@ -22,7 +22,9 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       spotId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Spots' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

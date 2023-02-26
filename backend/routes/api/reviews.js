@@ -5,18 +5,23 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+let schema;
+if (process.env.NODE_ENV === 'production') {
+  schema = process.env.SCHEMA;
+}
+
 const validateReview = [
   check('review')
     .notEmpty()
     .withMessage('Review text is required'),
   check('stars')
     .notEmpty()
-    .isInt({max: 5 , min:1})
+    .isInt({ max: 5, min: 1 })
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
 
-//Get all Reviews of the Current User
+//Get all Reviews of the Current User--?
 router.get('/current', requireAuth, async (req, res) => {
   const { user } = req;
   const reviews = await Review.findAll({
@@ -25,13 +30,22 @@ router.get('/current', requireAuth, async (req, res) => {
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
       {
         model: Spot,
-        attributes: { include: [], exclude: ['description', 'createdAt', 'updatedAt'] },
-        include: [{ model: SpotImage, attributes: ['url'] }]
-      },
+        attributes: {exclude: ['createdAt', 'updatedAt']},
+        include: [
+            {
+            model: SpotImage,
+            attributes: ['url']
+            }
+        ],attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
+        //[Sequelize.literal('(SELECT url FROM "SpotImages" WHERE "SpotImages"."spotId" = "Spot"."id" LIMIT 1)'), 'previewImage']
+      ]
+
+    },
       { model: ReviewImage, attributes: ['id', 'url'] }
     ],
   });
-  return res.status(200).json(reviews);
+  console.log(reviews);
+  return res.status(200).json({ Reviews: reviews });
 });
 
 //Add an Image to a Review based on the Review's id
