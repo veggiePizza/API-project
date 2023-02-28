@@ -98,14 +98,15 @@ const authDeleteBooking = async function (req, res, next) {
 const authDeleteReviewImage = async function (req, res, next) {//fix?
   const reviewImage = await ReviewImage.findByPk(req.params.id);
   if (reviewImage) {
-    const review = await Review.findByPk(reviewImage.spotId);
-    if (req.user.id == review.userId) return next();
+    const review = await Review.findByPk(reviewImage.reviewId);
+    if (req.user.id == review.userId)
+     return next();
     const err = new Error("Review must belong to the current user")
     err.message = 'Forbidden';
     err.status = 403;
     return next(err);
   }
-  const err = new Error("No Booking")
+  const err = new Error("No Image")
   err.message = "Review Image couldn't be found";
   err.status = 404;
   return next(err);

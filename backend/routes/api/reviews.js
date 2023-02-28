@@ -30,21 +30,13 @@ router.get('/current', requireAuth, async (req, res) => {
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
       {
         model: Spot,
-        attributes: {exclude: ['createdAt', 'updatedAt']},
-        include: [
-            {
-            model: SpotImage,
-            attributes: ['url']
-            }
-        ],attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
-        //[Sequelize.literal('(SELECT url FROM "SpotImages" WHERE "SpotImages"."spotId" = "Spot"."id" LIMIT 1)'), 'previewImage']
-      ]
-
-    },
-      { model: ReviewImage, attributes: ['id', 'url'] }
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [{ model: SpotImage, attributes: ['url'] }],
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+      },
+      { model: ReviewImage, attributes: ['id', 'url'] },
     ],
   });
-  console.log(reviews);
   return res.status(200).json({ Reviews: reviews });
 });
 
