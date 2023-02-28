@@ -95,7 +95,7 @@ const authDeleteBooking = async function (req, res, next) {
   return next(err);
 }
 
-const authDeleteReviewImage = async function (req, res, next) {
+const authDeleteReviewImage = async function (req, res, next) {//fix?
   const reviewImage = await ReviewImage.findByPk(req.params.id);
   if (reviewImage) {
     const review = await Review.findByPk(reviewImage.spotId);
