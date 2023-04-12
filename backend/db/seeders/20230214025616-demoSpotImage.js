@@ -11,17 +11,17 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'SpotImages';
     return queryInterface.bulkInsert(options, [{
-      url: "../image.png",
+      url: "../../pictures/sedona.jpeg",
       preview: true,
       spotId: 1
     },
     {
-      url: "../image.png",
+      url: "../../pictures/zion.jpeg",
       preview: true,
       spotId: 2
     },
     {
-      url: "../image.png",
+      url: "../../pictures/grand_teton.jpeg",
       preview: false,
       spotId: 3
     }], {});

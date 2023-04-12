@@ -1,0 +1,77 @@
+.spotForm{
+    margin-left: 500px;
+    margin-right: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.spotLocation{
+    border-bottom: solid 1px black;
+    padding-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.country{
+    width: 100%;
+
+}
+.country > input{
+    width: 100%;
+    
+}
+.address{
+    width: 100%;
+
+}
+.address > input{
+    width: 100%;
+    
+}
+.city{
+    width: 60%;
+
+}
+.city > input{
+    width: 100%;
+    
+}
+.state{
+    width: 30%;
+
+}
+.state > input{
+    width: 100%;
+    
+}
+.lat{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+.lat > input{
+    width: 100%;
+    
+}
+.lng{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+.lng > input{
+    width: 100%;
+    
+}
+label{
+    display: flex;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+}
+.description > h1{
+    font-size: small;
+}
