@@ -23,7 +23,6 @@ function LoginFormModal() {
         }
       );
   };
-  console.log("*******")
 
   return (
     <div className="logInForm">

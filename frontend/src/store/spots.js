@@ -1,8 +1,11 @@
+import { csrfFetch } from "./csrf";
 const LOAD = 'spots/LOAD';
 const CREATE = 'spots/CREATE';
 const READ = 'spots/READ';
 const UPDATE = 'spots/UPDATE'
 const DELETE = 'spots/DELETE';
+
+
 
 const loadSpots = spots => ({
     type: LOAD,
@@ -26,52 +29,53 @@ const deleteOneSpot = spot => ({
 });
 
 export const getSpots = () => async dispatch => {
-    const response = await fetch(`/api/spots`);
+    const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
         const spots = await response.json();
         dispatch(loadSpots(spots));
     }
 };
 export const createSpot = (spot) => async dispatch => {
-          console.log("****")
-        console.log(spot);
-        console.log("****")
-
-    const response = await fetch(`/api/spots`, {
+    const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(spot)
     });
-    if (response.ok) {
-        const newSpot = await response.json();
-        
-        //dispatch(createOneSpot(newSpot));
-    }
+}
 
-};
 export const readSpot = (id) => async dispatch => {
-    const response = await fetch(`/api/spots/${id}`);
+    const response = await csrfFetch(`/api/spots/${id}`);
     if (response.ok) {
         const spot = await response.json();
         dispatch(readOneSpot(spot));
     }
 };
-export const updateSpot = (id) => async dispatch => {
-    const response = await fetch(`/api/spots/${id}`);
+export const updateSpot = (id, spot) => async dispatch => {
+    const response = await fetch(`/api/spots/${id}`,{
+        method: 'PUT',
+        body: JSON.stringify(spot)
+    });
     if (response.ok) {
         const spot = await response.json();
         dispatch(updateOneSpot(spot));
     }
 };
 export const deleteSpot = (id) => async dispatch => {
-    const response = await fetch(`/api/spots/${id}`);
+    const response = await fetch(`/api/spots/${id}`,{
+        method: 'DELETE',
+    });
     if (response.ok) {
         const spot = await response.json();
         dispatch(deleteOneSpot(spot));
     }
 };
+export const getUserSpots = () => async dispatch => {
+    const response = await csrfFetch(`/api/spots/current`);
+    if (response.ok) {
+        const spots = await response.json();
+        dispatch(loadSpots(spots));
+    }
+};
+
 const initialState = { spots: [], isLoading: true };
 
 const spots = (state = initialState, action) => {

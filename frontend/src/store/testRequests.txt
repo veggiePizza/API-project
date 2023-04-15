@@ -1,0 +1,12 @@
+/*const spot2={
+    address: "1542 Some Address",
+    city: "San Francisco",
+    country: "United States",
+    description: "Place where web developers are created",
+    lat: "37.7645358",
+    lng: "122.4730327",
+    name: "App Academy",
+    price: "123",
+    state: "California"
+}*/
+

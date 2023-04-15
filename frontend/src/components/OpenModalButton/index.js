@@ -16,7 +16,7 @@ function OpenModalButton({
   };
 
   return (
-    <button className = "logInForm" onClick={onClick}>{buttonText}</button>
+    <button className = "reserveButton" onClick={onClick}>{buttonText}</button>
   );
 }
 

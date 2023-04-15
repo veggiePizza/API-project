@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import GetSpots from "./components/Spots/GetSpots"
 import CreateSpot from "./components/Spots/CreateSpot"
-import ReadSpot from "./components/Spots/ReadSpot";
 import LoginFormModal from "./components/LoginFormModal";
+import SpotPage from "../src/components/Spots/SpotPage"
+import LandingPage from "../src/components/Spots/LandingPage"
 
 
 function App() {
@@ -19,11 +19,12 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <LoginFormModal/>
       {isLoaded && (
         <Switch>
-          <Route exact path="/" component={GetSpots} />
-          <Route exact path='/spots/:id' component={ReadSpot} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path='/spots/:id' component={SpotPage} />
+          <Route exact path= "/login" component={LoginFormModal}> </Route>
+          <Route exact path='/spots/new' component={CreateSpot} />
         </Switch>
       )}
     </>
@@ -31,11 +32,3 @@ function App() {
 }
 
 export default App;
-
-//          <Route exact path='/spots/new' component={CreateSpot} />
-
-/*
-
-
-          <Route exact path= "/login" component={LoginFormModal}> </Route>
-*/

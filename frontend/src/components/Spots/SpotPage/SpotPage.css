@@ -8,6 +8,7 @@
   padding-right: 160px;
 }
 
+
 .spotDetails>h1 {
   display: flex;
   margin: 0px;
@@ -20,6 +21,28 @@
   padding: 0px;
   font-size: small;
 }
+.spotImages{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.mainPicture{
+  object-fit: cover;
+  border-radius: 15px;
+  width: 550px;
+  height: 430px;
+  margin: 0;
+  padding: 0;
+}
+.pictures{
+    object-fit: cover;
+    border-radius: 15px;
+    width: 270px;
+    height: 210px;
+    margin-left: 5px;
+    padding: 0;
+}
+
 .images{
   flex: 50;
   padding-top: 19px;
