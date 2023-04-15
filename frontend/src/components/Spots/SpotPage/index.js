@@ -7,7 +7,7 @@ import OpenModalMenuItem from '../../Navigation/OpenModalMenuItem';
 import OpenModalButton from '../../OpenModalButton';
 import LoginFormModal from '../../LoginFormModal';
 import CreateReview from '../../Reviews/CreateReview'
-import DeleteReview from '../../Reviews/DeleteReview'
+import {DeleteReview} from '../../Reviews/DeleteReview'
 import './SpotPage.css';
 
 const SpotPage = () => {
@@ -119,25 +119,18 @@ const SpotPage = () => {
               </>
             )}
             <ol>
-              {reviews && Object.values(reviews).map(({ User, review, updatedAt, userId }) => (
+              {reviews && Object.values(reviews).map(({ User, id, review, updatedAt, userId }) => (
                 <div>
                   <h4 className="date">{User.firstName}</h4>
                   <h5 className="date">{parseDate(updatedAt)}</h5>
                   <p >{review}</p>
 
-
-
-                  {sessionUser ? (
+                  <h4 className="date">{`${sessionUser.id}`}</h4>
+                  {sessionUser.id === User.id && (
                   <>
-                    <OpenModalButton className='deleteReviewButton'
-                      buttonText="Delete"
-                      modalComponent={<DeleteReview spot = {spot}/>}
-                    />
-                    <h2>{`Be the first to post a review!`}</h2>
+                   <DeleteReview/>
                   </>
-                ) : (<>
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <h6>New</h6></>)}
+                ) }
              
 
 
