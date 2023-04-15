@@ -18,8 +18,8 @@ module.exports = {
       lat: 36.36,
       lng: 68.72,
       name: "Sedona Vortex",
-      description: "a place with good views",
-      price: 135,
+      description: "Entire back yard!!  Private and closed off.  Neighbors and farther apart than other neighborhoods.  Could bring a dog or a child to run around.  Open format design, designed to open bi folding doors so you enjoy fresh air and outdoor.   inside outside design.  I am a builder so you will like, I believe.  Made with love.",
+      price: 210,
       ownerId: 1,
     },
     {

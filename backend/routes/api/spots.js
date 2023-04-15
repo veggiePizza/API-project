@@ -183,7 +183,7 @@ router.get('/:id', async (req, res) => {
       ]
     },
     include: [
-      { model: Review, attributes: [] },
+      { model: Review }, //, attributes: []
       { model: SpotImage, attributes: ['id', 'url', 'preview'] },
       { model: User, attributes: ['id', 'firstName', 'lastName'], as: "Owner" }
     ],
@@ -230,7 +230,7 @@ router.delete('/:id', requireAuth, authIsSpot, async (req, res) => {
 });
 
 //Get all Reviews by a Spot's id
-router.get('/:id/reviews', requireAuth, async (req, res) => {
+router.get('/:id/reviews', async (req, res) => {
   const checkSpot = await Spot.findByPk(req.params.id);
   if (checkSpot) {
     const reviews = await Review.findAll({
@@ -239,6 +239,7 @@ router.get('/:id/reviews', requireAuth, async (req, res) => {
         { model: User, attributes: ['id', 'firstName', 'lastName'] },
         { model: ReviewImage, attributes: ['id', 'url'] }
       ],
+      order: [['updatedAt', 'DESC']]
     });
     return res.status(200).json({Reviews: reviews});
   }
@@ -254,7 +255,7 @@ router.post('/:id/reviews', requireAuth, validateReview, async (req, res) => {
     const checkExistingReviews = await Review.findOne({ where: { spotId: req.params.id } });
     if (checkExistingReviews)
       return res.status(403).json({ message: "User already has a review for this spot", statusCode: 403 });
-    const newReview = await Review.create({ review, stars, userId: user.id, spotId: spot.id })
+    const newReview = await Review.create({ review, stars, userId: user.id, spotId: spot.id, createdAt: new Date(), updatedAt: new Date() })
     if (newReview) return res.status(201).json(newReview);
   }
   return res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 });
