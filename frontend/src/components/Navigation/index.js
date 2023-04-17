@@ -10,11 +10,18 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className='nav'>
-      <NavLink exact to="/"><img className="nav-logo" src={logo}></img></NavLink>
-      {isLoaded && (<NavLink className = "CreateSpot" exact to= "/spots/new">Airbnb your home</NavLink>)}
-      {isLoaded && (<ProfileButton classsName = "menuButton" user={sessionUser} /> )}
+      <div>
+        <NavLink exact to="/"><img className="nav-logo" src={logo}></img></NavLink>
+      </div>
+      <div>
+        {isLoaded && (<>
+          {sessionUser && <><NavLink className="create-spot-link" exact to="/spots/new">Airbnb your home</NavLink></>}
+          <ProfileButton classsName="menuButton" user={sessionUser} />
+        </>)}
+      </div>
     </div>
   );
 }
 
 export default Navigation;
+

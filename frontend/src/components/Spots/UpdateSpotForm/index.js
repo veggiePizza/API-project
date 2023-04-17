@@ -8,9 +8,9 @@ import { getSpots } from '../../../store/spots';
 import { readSpot } from '../../../store/spots';
 import CreateImage from '../../Images/CreateImage';
 import { resetSingleSpot } from '../../../store/spots';
-import "./SpotForm.css";
+import "./UpdateSpotForm.css";
 
-function SpotForm({ spot, formType }) {
+function UpdateSpotForm({ spot, formType }) {
     const idx = useSelector(state => state.spots.spot);
     const history = useHistory();
     const [address, setAddress] = useState(spot.address);
@@ -79,15 +79,11 @@ function SpotForm({ spot, formType }) {
 "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
 "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg"]
 
-        if (formType === "Create Spot") {
-            dispatch(createSpot(spot2, spotImages2))
+        if (formType === "Update Spot") {
+            dispatch(updateSpot(spot))
             /*dispatch(addImage(newId, spotImg))*/
 
         }
-        else {
-            dispatch(updateSpot(spot))
-        }
-
 
     
 
@@ -130,7 +126,7 @@ function SpotForm({ spot, formType }) {
 
     return (
         <div className='spotForm'>
-            <h1>Create a New Spot</h1>
+            <h1>Update Your Spot</h1>
             <h2>Where's your place located?</h2>
             <h3>Guests will only get your exact address once they booked a reservation</h3>
 
@@ -277,13 +273,13 @@ function SpotForm({ spot, formType }) {
 
                 </div>
 
-                <button type="submit">Create Spot</button>
+                <button type="submit">Update Your Spot</button>
             </form>
         </div>
     );
 }
 
-export default SpotForm;
+export default UpdateSpotForm;
 
 
 /*

@@ -1,6 +1,12 @@
 @media screen and (min-width: 1130px) {
+  .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .allSpots {
-    padding-top: 100px;
+    padding-top: 130px;
     padding-left: 80px;
     padding-right: 80px;
     display: flex;
@@ -8,39 +14,35 @@
     flex-wrap: wrap;
   }
 
-  .spotLink {
+  .card {
     flex: 23%;
     display: flex;
     flex-direction: column;
-    margin: 7px;
+    margin: 4px;
+    border: 1px solid black
+  }
+
+  .card>h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
   }
 
   .spotLink>img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     object-fit: cover;
     border-radius: 15px;
-    width: 98%;
-    height: 98%;
-    margin-left: 2px;
+    width: 225px;
+    height: 225px;
+    margin: 0;
+    padding: 0;
 
     border: 1px solid black
   }
 
-  .container2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 3px;
+  .spotLink>h3 {
+    margin: 2px
   }
-
-  .spotLink>h2 {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-  }
-
 
   .spotLink>h4 {
     margin: 2px;
@@ -48,27 +50,15 @@
 
 }
 
-
-
-.spotLink .spotNameCard {
-  visibility: hidden;
+.spotNameCard{
+  display:block;
+  font-size: medium;
+  
 }
-
-.spotLink:hover .spotNameCard {
-  visibility: visible;
+.spotLink:hover + .spotNameCard {
+  display: inline;
+  color: red;
 }
-
-.rating {
-  display: flex;
-  align-items: center;
-}
-
-.rating>* {
-  padding: 1px;
-  margin: 2px;
-}
-
-
 
 @media screen and (max-height: 800px) {
   .pokemon-detail-image {

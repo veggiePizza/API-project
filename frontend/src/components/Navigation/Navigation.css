@@ -2,22 +2,80 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.nav{
+.nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position:absolute;
+    position: absolute;
     border-bottom: solid grey .5px;
     width: 100%;
-    height: 15%;
+    height: 8%;
+    position: absolute;
 }
+
+.nav>div {
+    display: flex;
+}
+
 .nav-logo {
-    flex: 50%;
     width: 90px;
-    height:auto;
+    height: auto;
+    display: flex;
+    align-items: center;
 }
-.menuButton{
-   flex: 50%;
-    height:auto;
+
+.menuButton {
+    display: flex;
+    align-items: center;
+}
+
+.create-spot-link {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.menuList {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+}
+
+.menuList {
+    margin-top: 55px;
+    border: 5px solid #ff385d;
+    border-radius: 10px;
+    background: white;
+}
+
+.firstLiMenu {
+    margin-top: -10px;
+}
+
+.seperator {
+    border-bottom: solid grey .5px;
+}
+li{
+    padding: 1px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logoutButton {
+    background: #ff385d;
+    border-radius: 20px;
+    margin-top: 3px;
+    margin-left: 20px;
+    padding:3px;
+    margin-bottom: -5px;
+    color: white;
+    font-size:medium;
 }

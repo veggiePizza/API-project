@@ -252,9 +252,9 @@ router.post('/:id/reviews', requireAuth, validateReview, async (req, res) => {
   const { user } = req;
   const spot = await Spot.findByPk(req.params.id);
   if (spot) {
-    const checkExistingReviews = await Review.findOne({ where: { spotId: req.params.id } });
+    const checkExistingReviews = await Review.findOne({ where: { spotId: req.params.id, userId: user.id  } });
     if (checkExistingReviews)
-      return res.status(403).json({ message: "User already has a review for this spot", statusCode: 403 });
+      return res.status(403).json({ message: "User already has a review for this spot", statusCode: 403});
     const newReview = await Review.create({ review, stars, userId: user.id, spotId: spot.id, createdAt: new Date(), updatedAt: new Date() })
     if (newReview) return res.status(201).json(newReview);
   }

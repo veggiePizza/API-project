@@ -7,6 +7,7 @@ import CreateSpot from "./components/Spots/CreateSpot"
 import LoginFormModal from "./components/LoginFormModal";
 import SpotPage from "../src/components/Spots/SpotPage"
 import LandingPage from "../src/components/Spots/LandingPage"
+import SpotsManagement from "./components/Spots/SpotsManagement";
 
 
 function App() {
@@ -20,12 +21,16 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path='/spots/:id' component={SpotPage} />
-          <Route exact path= "/login" component={LoginFormModal}> </Route>
-          <Route exact path='/spots/new' component={CreateSpot} />
-        </Switch>
+        <>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path='/spots/current' component={SpotsManagement} />
+            <Route exact path='/spots/new' component={CreateSpot} />
+            <Route exact path='/spots/:id' component={SpotPage} />
+            <Route exact path="/login" component={LoginFormModal}/> 
+          </Switch>
+
+        </>
       )}
     </>
   );

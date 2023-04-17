@@ -11,27 +11,32 @@ const LandingPage = () => {
 
   useEffect(() => {
     dispatch(getSpots());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className='allSpots'>
       {Object.values(spots).map(({ id, name, city, state, price, previewImage, avgRating }) => (
         <NavLink className='spotLink' to={`/spots/${id}`}>
-          <h2>{name}</h2>
+          <h2 className=' spotNameCard'>{name}</h2>
           <img src={`${previewImage}`}></img>
-          <h3>{city}, {state}</h3>
-          <div className='rating'>
-            {avgRating ? (
-              <>
+
+          <div className='container2'>
+            <h3>{city}, {state}</h3>
+
+            <div className='rating'>
+              {avgRating ? (
+                <>
+                  <i class="fa-sharp fa-solid fa-star"></i>
+                  <h6>{`${Number(avgRating).toFixed(2)}`}</h6>
+                </>
+              ) : (<>
                 <i class="fa-sharp fa-solid fa-star"></i>
-                <h6>{`${Number(avgRating).toFixed(2)}`}</h6>
-              </>
-            ) : (<>
-              <i class="fa-sharp fa-solid fa-star"></i>
-              <h6>New</h6>
-            </>)}
+                <h6>New</h6>
+              </>)}
+            </div>
           </div>
-          <h4>{`$${price} night`}</h4>
+          
+          <h4>{`$${price.toFixed(2)} night`}</h4>
         </NavLink>
       ))}
     </div>
