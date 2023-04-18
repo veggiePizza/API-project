@@ -38,7 +38,7 @@ module.exports = {
       },
 
       {
-        url: "https://www.territorysupply.com/wp-content/uploads/2020/06/airbnb-zion-national-park.jpg",
+        url: "https://57hours.com/wp-content/uploads/2021/06/hiking-grand-teton.jpg",
         preview: true,
         spotId: 2
       },
