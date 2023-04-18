@@ -1,10 +1,7 @@
+// backend/routes/index.js
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
-router.get('/',(req,res) => {
-  return res.json({demo:"lol"});
-})
-
 
 router.use('/api', apiRouter);
 
