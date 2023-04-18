@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       reviewId: {
         type: Sequelize.INTEGER,
