@@ -43,12 +43,12 @@ module.exports = {
         spotId: 2
       },
       {
-        url: "https://www.myutahparks.com/wp-content/uploads/2021/02/Zion-Watchman-swimmers_Tam19RichMartello_1600.jpg",
+        url: "https://theplanetd.com/images/Things-to-do-in-Sedona-Arizona.jpg",
         preview: true,
         spotId: 2
       },
       {
-        url: "https://media.cntraveler.com/photos/56c4b2bc5464a8041fd7b883/16:9/w_1280,c_limit/more-than-just-parks-cr.jpg",
+        url: "https://theplanetd.com/images/Things-to-do-in-Sedona-Arizona.jpg",
         preview: true,
         spotId: 2
       },
