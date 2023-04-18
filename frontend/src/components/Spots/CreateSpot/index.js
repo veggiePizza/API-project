@@ -1,6 +1,11 @@
 import SpotForm from "../SpotForm"
+import { useDispatch } from 'react-redux';
+import { resetSingleSpot } from "../../../store/spots";
 
-const CreateReportForm = () => {
+const CreateSpot = () => {
+    const dispatch = useDispatch();
+    dispatch(resetSingleSpot());
+
     const spot = {
         address: '',
         city: '',
@@ -18,4 +23,4 @@ const CreateReportForm = () => {
     );
 }
 
-export default CreateReportForm;
+export default CreateSpot;

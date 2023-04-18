@@ -1,0 +1,51 @@
+.confirmDelete{
+    margin: 10px;;
+}
+.confirmDelete > *{
+    display: flex;
+    flex-direction: column;
+}
+.confirmDelete > h1{
+    display: flex;
+    align-items: center;
+    font-size: xx-large;
+}
+.confirmDelete > h2{
+    display: flex;
+    align-items: center;
+    font-size: large;
+}
+.confirmDelete > h2{
+    display: flex;
+    align-items: center;
+    font-size: large;
+}
+.confirmDelete > .confirmDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    border: 1px solid black;
+    width: 85%;
+    height: 50px;
+    margin-left: 25px;
+    color: white;
+    font-size: larger;
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    box-shadow: 0 0 3px black;
+}
+.confirmDelete > .cancelDelete{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    border: 1px solid black;
+    width: 85%;
+    height: 50px;
+    margin-left: 25px;
+    color: white;
+    font-size: larger;
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    box-shadow: 0 0 3px black;
+
+    align-items: center;
+}

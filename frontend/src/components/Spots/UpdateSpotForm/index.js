@@ -8,9 +8,9 @@ import { getSpots } from '../../../store/spots';
 import { readSpot } from '../../../store/spots';
 import CreateImage from '../../Images/CreateImage';
 import { resetSingleSpot } from '../../../store/spots';
-import "./SpotForm.css";
+import "./UpdateSpotForm.css";
 
-function SpotForm({ spot, formType }) {
+function UpdateSpotForm({ spot, formType }) {
     const idx = useSelector(state => state.spots.spot);
     const history = useHistory();
     const [address, setAddress] = useState(spot.address);
@@ -61,9 +61,6 @@ function SpotForm({ spot, formType }) {
         spot = { ...spot, address, city, state, country, lat, lng, name, description, price };
         const spotImages = [mainImg, img2, img3, img4, img5]
 
-
-
-
         const spot2={
             address: "1542 Some Address",
             city: "San Francisco",
@@ -82,10 +79,41 @@ function SpotForm({ spot, formType }) {
 "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
 "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg"]
 
-        if (formType === "Create Spot") {
-            dispatch(createSpot(spot2, spotImages2))
+        if (formType === "Update Spot") {
+            dispatch(updateSpot(spot))
+            /*dispatch(addImage(newId, spotImg))*/
 
         }
+
+    
+
+
+        //history.push(`/spots/${spot.id}`);
+
+
+        /* const contactUsInformation = {
+           name,
+           email,
+           phone,
+           phoneType,
+           comments,
+           submittedOn: new Date()
+         };*/
+
+        // Ideally, we'd persist this information to a database using a RESTful API.
+        // For now, though, just log the contact us information to the console.
+        //console.log(contactUsInformation);
+        /*
+            // Reset the form state.
+            setName('');
+            setEmail('');
+            setPhone('');
+            setPhoneType('');
+            setComments('');
+            //!!START SILENT
+            setValidationErrors([]);
+            setHasSubmitted(false);*/
+        //!!END
 
     }
 
@@ -98,7 +126,7 @@ function SpotForm({ spot, formType }) {
 
     return (
         <div className='spotForm'>
-            <h1>Create a New Spot</h1>
+            <h1>Update Your Spot</h1>
             <h2>Where's your place located?</h2>
             <h3>Guests will only get your exact address once they booked a reservation</h3>
 
@@ -137,7 +165,7 @@ function SpotForm({ spot, formType }) {
                     </div>
                     <div className='state'>
                         <label htmlFor='comments'>State</label>
-                        <input
+                        <textarea
                             id='comments'
                             placeholder="STATE"
                             name='comments'
@@ -178,8 +206,8 @@ function SpotForm({ spot, formType }) {
                         value={description}
                     />
                 </div>
-                <div className='title'>
-                    <label className='name'>Create a title for your spot</label>
+                <div>
+                    <label htmlFor='comments'>Create a title for your spot</label>
                     <h1>Catch guests' attention with a spot title that highlights what makes your place special.</h1>
                     <textarea
                         id='comments'
@@ -190,7 +218,7 @@ function SpotForm({ spot, formType }) {
                     />
                 </div>
 
-                <div className='title'>
+                <div>
                     <label htmlFor='comments'>Set a base price for your spot</label>
                     <h1>Competitive pricing can help your listing stand out and rank higher in search results.</h1>
                     <textarea
@@ -201,7 +229,7 @@ function SpotForm({ spot, formType }) {
                         value={price}
                     />
                 </div>
-                <div className='title'>
+                <div>
                     <label htmlFor='comments'>Liven up your spot with photos</label>
                     <h1>Submit a link to at least one photo to publish your spot.</h1>
                     <textarea
@@ -245,13 +273,13 @@ function SpotForm({ spot, formType }) {
 
                 </div>
 
-                <button type="submit">Create Spot</button>
+                <button type="submit">Update Your Spot</button>
             </form>
         </div>
     );
 }
 
-export default SpotForm;
+export default UpdateSpotForm;
 
 
 /*
