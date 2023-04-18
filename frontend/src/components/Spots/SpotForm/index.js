@@ -61,6 +61,9 @@ function SpotForm({ spot, formType }) {
         spot = { ...spot, address, city, state, country, lat, lng, name, description, price };
         const spotImages = [mainImg, img2, img3, img4, img5]
 
+
+
+
         const spot2={
             address: "1542 Some Address",
             city: "San Francisco",
@@ -81,43 +84,8 @@ function SpotForm({ spot, formType }) {
 
         if (formType === "Create Spot") {
             dispatch(createSpot(spot2, spotImages2))
-            /*dispatch(addImage(newId, spotImg))*/
 
         }
-        else {
-            dispatch(updateSpot(spot))
-        }
-
-
-    
-
-
-        //history.push(`/spots/${spot.id}`);
-
-
-        /* const contactUsInformation = {
-           name,
-           email,
-           phone,
-           phoneType,
-           comments,
-           submittedOn: new Date()
-         };*/
-
-        // Ideally, we'd persist this information to a database using a RESTful API.
-        // For now, though, just log the contact us information to the console.
-        //console.log(contactUsInformation);
-        /*
-            // Reset the form state.
-            setName('');
-            setEmail('');
-            setPhone('');
-            setPhoneType('');
-            setComments('');
-            //!!START SILENT
-            setValidationErrors([]);
-            setHasSubmitted(false);*/
-        //!!END
 
     }
 
@@ -169,7 +137,7 @@ function SpotForm({ spot, formType }) {
                     </div>
                     <div className='state'>
                         <label htmlFor='comments'>State</label>
-                        <textarea
+                        <input
                             id='comments'
                             placeholder="STATE"
                             name='comments'
@@ -210,8 +178,8 @@ function SpotForm({ spot, formType }) {
                         value={description}
                     />
                 </div>
-                <div>
-                    <label htmlFor='comments'>Create a title for your spot</label>
+                <div className='title'>
+                    <label className='name'>Create a title for your spot</label>
                     <h1>Catch guests' attention with a spot title that highlights what makes your place special.</h1>
                     <textarea
                         id='comments'
@@ -222,7 +190,7 @@ function SpotForm({ spot, formType }) {
                     />
                 </div>
 
-                <div>
+                <div className='title'>
                     <label htmlFor='comments'>Set a base price for your spot</label>
                     <h1>Competitive pricing can help your listing stand out and rank higher in search results.</h1>
                     <textarea
@@ -233,7 +201,7 @@ function SpotForm({ spot, formType }) {
                         value={price}
                     />
                 </div>
-                <div>
+                <div className='title'>
                     <label htmlFor='comments'>Liven up your spot with photos</label>
                     <h1>Submit a link to at least one photo to publish your spot.</h1>
                     <textarea

@@ -20,12 +20,12 @@ function DeleteSpot(id){
 
 
     return(
-        <>
+        <div className="confirmDelete">
             <h1>Confirm Delete</h1>
             <h2>Are you sure you want to remove this spot from the listings?</h2>
-            <button onClick={() => setConfirm("delete")}>Yes (Delete Spot)</button>
-            <button onClick={() => setConfirm("keep")}>No (Keep Spot)</button>
-        </>
+            <button className = "confirmDelete" onClick={() => setConfirm("delete")}>Yes (Delete Spot)</button>
+            <button className = "cancelDelete"onClick={() => setConfirm("keep")}>No (Keep Spot)</button>
+        </div>
     )
 }
 

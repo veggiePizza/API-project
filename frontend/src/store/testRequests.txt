@@ -10,3 +10,21 @@
     state: "California"
 }*/
 
+
+        const spot2={
+            address: "1542 Some Address",
+            city: "San Francisco",
+            country: "United States",
+            description: "Place where web developers are created",
+            lat: "37.7645358",
+            lng: "122.4730327",
+            name: "App Academy",
+            price: "123",
+            state: "California"
+        }
+
+        const spotImages2 =["https://www.science.org/do/10.1126/science.abd8020/abs/frog_1280p_0.jpg",
+    "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
+"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
+"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
+"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg"]

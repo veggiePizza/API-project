@@ -21,13 +21,15 @@ const SpotsManagement = () => {
 
 
   return (
-    <div className='allSpots'>
+    <div className='spotsManagement'>
       <h1>Manage Spots</h1>
-      {Object.keys(spots).length ? (
-        <>
+      <NavLink exact to="/spots/new">Create a New Spot</NavLink>
+      {Object.keys(spots).length &&
+        <div className='allSpots'>
 
           {Object.values(spots).map(({ id, name, city, state, price, previewImage, avgRating }) => (
             <>
+            
               <NavLink className='spotLink' to={`/spots/${id}`}>
                 <h2>{name}</h2>
                 <img src={`${previewImage}`}></img>
@@ -46,24 +48,24 @@ const SpotsManagement = () => {
                 <h4>{`$${price} night`}</h4>
               </NavLink>
               <div>
-              <OpenModalButton className='updateSpotButton'
-                  buttonText="Update"
-                  modalComponent={<UpdateSpot id = {id} />}
-                />
-                <OpenModalButton className='deleteSpotButton'
+
+                <div className='deleteButton'>
+                  <OpenModalButton className='updateSpotButton'
+                    buttonText="Update"
+                    modalComponent={<UpdateSpot id={id} />}
+                  /></div>
+                <div className='updateButton'>  <OpenModalButton className='deleteSpotButton'
                   buttonText="Delete"
-                  modalComponent={<DeleteSpot id = {id} />}
-                />
+                  modalComponent={<DeleteSpot id={id} />}
+                /></div>
 
                 <></>
               </div>
             </>
 
           ))}
-        </>
-      ) : (<>
-        <NavLink exact to="/spots/new">Create a New Spot</NavLink>
-      </>)}
+        </div>
+      }
 
     </div>
   )

@@ -74,7 +74,14 @@ const SpotPage = () => {
             <h1>{`${spot.name}`}</h1>
             <h2>{`${spot.city}, ${spot.state}, ${spot.country}`}</h2>
             <div className='spotImages'>
-              <>{spot.SpotImages && <img className="mainPicture" src={spot.SpotImages[0].url}></img>}
+              <>{spot.SpotImages &&
+                <>
+                  {Object.values(spot.SpotImages).length && <>
+                    <img className="mainPicture" src={spot.SpotImages[0].url}></img>
+                  </>}
+                </>
+
+              }
                 <div className="sidePictures">
                   {spot.SpotImages && (<>{Object.values(spot.SpotImages).map(({ url }) => (
                     <>
@@ -86,30 +93,41 @@ const SpotPage = () => {
             </div>
 
             <div className='reserve'>
-              <div className = "description">
-                {spot.Owner && (<><h3>{`Hosted by ${spot.Owner.firstName} ${spot.Owner.lastName}`}</h3></>)}
+              <div className="description">
+                {spot.Owner && (<><h2>{`Hosted by ${spot.Owner.firstName} ${spot.Owner.lastName}`}</h2></>)}
                 <h4>{`${spot.description}`}</h4>
               </div>
 
+
               <div className='reserveMenu'>
-                <h5>{`$${spot.price} night`}</h5>
-                {spot.avgStarRating ? (
-                  <>
-                    <i class="fa-sharp fa-solid fa-star"></i>
-                    <h6>{`${spot.avgStarRating.toFixed(2)}·`}</h6>
-                    {spot.Reviews.length == 1 ? (
-                      <h7>{`1 review`}</h7>
-                    ) : (
-                      <h7>{`${spot.numReviews} reviews`}</h7>)}
-                  </>
-                ) : (<>
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <h6>New</h6>
-                </>)}
-                <OpenModalButton className='reserveButton'
-                  buttonText="Reserve"
-                  modalComponent={<h2>Feature Coming Soon...</h2>}
-                />
+
+                <div className='descriptionBox'>
+
+                  <h4>{`$${spot.price} night`}</h4>
+
+                  <div className="ratingSummary">
+                    {spot.avgStarRating ? (
+                      <>
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <h6>{`${spot.avgStarRating.toFixed(2)}`}</h6>
+                        <h2>·</h2>
+                        {spot.Reviews.length == 1 ? (
+                          <h7>{`1 review`}</h7>
+                        ) : (
+                          <h7>{`${spot.numReviews} reviews`}</h7>)}
+                      </>
+                    ) : (<>
+                      <i class="fa-sharp fa-solid fa-star"></i>
+                      <h6>New</h6>
+                    </>)}
+                  </div>
+                </div>
+                <div className="reserveButton">
+                  <OpenModalButton
+                    buttonText="Reserve"
+                    modalComponent={<h2>Feature Coming Soon...</h2>}
+                  /></div>
+
               </div>
 
             </div>
@@ -122,35 +140,48 @@ const SpotPage = () => {
 
             {spot.avgStarRating ? (
               <>
-                <i class="fa-sharp fa-solid fa-star"></i>
-                <h6>{`${spot.avgStarRating.toFixed(2)}`}</h6>
-                {spot.Reviews.length == 1 ? (
-                  <h7>{`1 review`}</h7>
-                ) : (
-                  <h7>{`${spot.numReviews} reviews`}</h7>)}
+                <div className='leaveReview'>
+                  <div className='ratingSummary2'>
 
-                <ol>
-                  {!hasReview && <>     {allowPost && <>
-                    <OpenModalButton className='postReviewButton'
-                      buttonText="Post Your Review"
-                      modalComponent={<CreateReview />}
-                    />
-                  </>}
-                  </>}
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <h6>{`${spot.avgStarRating.toFixed(2)}`}</h6>
+                    {spot.Reviews.length == 1 ? (
+                      <h7>{`1 review`}</h7>
+                    ) : (
+                      <h7>{`${spot.numReviews} reviews`}</h7>)}
+                  </div>
+
+
+                  <div>
+                    {!hasReview && <>     {allowPost &&
+                      <div className='postReviewButton'>
+                        <OpenModalButton
+                          buttonText="Post Your Review"
+                          modalComponent={<CreateReview />}
+                        />
+                      </div>
+                    }
+                    </>}
+                  </div>
+
+                </div>
+
+                <ol className='allReviews'>
+
 
                   {reviews && Object.values(reviews).map(({ User, id, review, updatedAt, userId }) => (
                     <div>
                       <h4 className="date">{User.firstName}</h4>
                       <h5 className="date">{parseDate(updatedAt)}</h5>
-                      <p >{review}</p>
+                      <p className='reviewParagraph'>{review}</p>
                       {sessionUser && <>
                         {sessionUser.id === User.id && (
-                          <>
+                          <div className='deleteReviewButton'>
                             <OpenModalButton className='deleteReviewButton'
                               buttonText="Delete"
                               modalComponent={<DeleteReview spotId={newX} id={id} />}
                             />
-                          </>
+                          </div>
                         )}</>}
                     </div>
                   ))}

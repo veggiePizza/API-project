@@ -65,7 +65,7 @@
   padding: 20px;
   background-color: white;
   color: black;
-  box-shadow: 0 0 50px black;
+  box-shadow: 0 0 0px black;
   border-radius: 4px;
   text-align: center;
   width: 100%;
@@ -77,30 +77,112 @@
 .description{
   display: flex;
 }
-.description>h3{
+.description>h2{
   display: flex;
+  margin: 0px;
+}
+.description > h4{
+  display: flex;
+  margin-top: 10px
 }
 
-.reserve>h3 {
-  display: flex;
-  margin-top: 0px;
-  padding: 0px;
-}
-.reserve>h4 {
-  display: flex;
-  margin-top: 0px;
-  padding: 0px;
-}
+
 .reserveMenu {
   justify-content: flex-end;
   display: flex;
+  flex-direction: column;
   margin-top: 0px;
   padding: 0px;
-  border: 1px solid rgb(221,221,221);
-  border-radius: 5px;
-  align-items: flex-end;
+  border-radius: 8px;
+  align-items: center;
   flex-wrap: wrap;
+  width: 350px;
+
+
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 10px black;
 }
+
+.descriptionBox{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 325px;
+  height: 50px;
+}
+
+.descriptionBox{
+  display: flex;
+  justify-content: space-between;
+}
+.ratingSummary{
+  display: flex;
+  align-items: center;
+}
+.ratingSummary > *{
+  font-size: medium;
+  margin: 2px;
+}
+.ratingSummary > h2{
+  font-size: larger;
+  margin: 2px;
+}
+
+.reserveButton {
+  background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+  border-radius: 8px;
+  width: 300px;
+  height: 35px;
+  margin-top: 2px;;
+  
+}
+.reserveButton > *{
+  color: white;
+  margin-top: 8px;
+  font-size: medium;
+}
+
+
+
+
+
+.leaveReview{
+  display: flex;
+  flex-direction: column;
+}
+
+.ratingSummary2{
+  display: flex;
+  align-items: center;
+}
+.ratingSummary2 > *{
+  font-size: larger;
+  margin: 2px;
+}
+
+.postReviewButton{
+  display: flex;
+  background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+  border-radius: 4px;
+  width: 125px;
+  height: 20px;
+}
+
+
+.postReviewButton > *{
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: small;
+}
+
+
+
 
 .reserveMenu > h5{
   display: flex;
@@ -133,24 +215,49 @@
   border-radius: 5px;
   flex-grow: 1;
 }
-.reserveButton {
-  background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
-  border-radius: 3px;
-  color: white;
-  box-shadow: 2px 2px 0px 0px black;
-  flex-grow: 1;
-}
+
 
 .reviews{
   padding-left: 160px;
   padding-right: 160px;
 }
-.date {
-  color: gray;
-}
+
 .allowedReview{
   visibility: visible;
 }
 .notAllowedReview{
   height: 400px;
 }
+
+.allReviews{
+  margin-left: -40px;
+}
+.date {
+  color: gray;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: smaller;
+}
+.reviewParagraph{
+  font-size:medium;
+  margin-top: 7px;
+}
+
+.deleteReviewButton{
+  display: flex;
+  background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+  border-radius: 4px;
+  width: 60px;
+  height: 20px;
+}
+
+
+.deleteReviewButton > *{
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: small;
+}
+

@@ -75,8 +75,9 @@ function ReviewForm({ review, formType }) {
                     onChange={(e) => setReviewText(e.target.value)}
                     required
                 />
-                <StarRating change={handleRating} stars={stars} />
-                {!validationErrors.length ? (<button type="submit" >Submit Your Review</button>):(<button type="submit" disabled >Submit Your Review</button>)}
+                <div className="stars">
+                <StarRating  change={handleRating} stars={stars} /></div>
+                {!validationErrors.length ? (<button className = "submitReview" type="submit" >Submit Your Review</button>):(<button className = "submitReview" type="submit" disabled >Submit Your Review</button>)}
             </form>
         </div>
     );

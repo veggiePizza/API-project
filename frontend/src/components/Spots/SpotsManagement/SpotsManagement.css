@@ -1,0 +1,35 @@
+.spotsManagement{
+    padding-top: 80px;
+    margin-left: 100px;
+    margin-right: 100px;
+    display:flex;
+    flex-direction: column;
+}
+
+.deleteButton, .updateButton{
+    display: flex;
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    border-radius: 4px;
+    width: 60px;
+    height: 20px;
+  }
+  
+  
+  .deleteButton > *{
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: small;
+  }
+  
+  .updateButton > *{
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: small;
+  }
+  

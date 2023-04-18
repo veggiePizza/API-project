@@ -1,9 +1,13 @@
 .spotForm{
     margin-left: 500px;
     margin-right: 500px;
+    padding-top: 100px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+}
+.spotForm > label{
+    font-size: medium;
 }
 .spotLocation{
     border-bottom: solid 1px black;
@@ -35,14 +39,7 @@
     width: 100%;
     
 }
-.state{
-    width: 30%;
 
-}
-.state > input{
-    width: 100%;
-    
-}
 .lat{
     width: 49%;
     display: flex;
@@ -61,10 +58,14 @@
     justify-content: flex-end;
 
 }
-.lng > input{
-    width: 100%;
-    
+
+.name{
+    width:98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
+
 label{
     display: flex;
 }
@@ -72,6 +73,15 @@ label{
     display: flex;
     flex-direction: column;
 }
-.description > h1{
+.photoLinks{
+    display: flex;
+    flex-direction: column;
+}
+.title > label{
+    font-size: x-large;
+}
+.title > h1{
     font-size: small;
+}.title > textarea{
+    width: 98%;
 }
