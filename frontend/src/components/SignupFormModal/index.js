@@ -20,13 +20,13 @@ function SignupFormModal() {
   useEffect(() => {
     setErrors(false);
     const errors = [];
-    if (firstName.length < 4) errors.push('login is required');
-    if (!lastName.length) errors.push('pass is required');
-    if (!email.length) errors.push('login is required');
-    if (!username.length) errors.push('pass is required');
-    if (password.length < 6) errors.push('login is required');
-    if (!confirmPassword.length) errors.push('pass is required');
-    if (password != confirmPassword) errors.push('pass is required');
+    if (firstName.length < 4) errors.push('first name is required');
+    if (!lastName.length) errors.push('last name is required');
+    if (!email.length) errors.push('email is required');
+    if (username.length < 4) errors.push('valid username is required');
+    if (password.length < 6) errors.push('valid password is required');
+    if (!confirmPassword.length) errors.push('confirm password is required');
+    if (password != confirmPassword) errors.push('Confirm Password field must be the same as the Password field');
     setValidationErrors(errors);
   }, [firstName, lastName, email, username, password, confirmPassword])
 
