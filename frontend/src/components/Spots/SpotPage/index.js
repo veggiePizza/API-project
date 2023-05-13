@@ -197,10 +197,12 @@ const SpotPage = () => {
                 {sessionUser ? (
                   <> {allowPost && <><i class="fa-sharp fa-solid fa-star"></i>
                     <h6>New</h6>
-                    <OpenModalButton className='postReviewButton'
-                      buttonText="Post Your Review"
-                      modalComponent={<CreateReview />}
-                    />
+                    <div className='postReviewButton'>
+                      <OpenModalButton
+                        buttonText="Post Your Review"
+                        modalComponent={<CreateReview />}
+                      />
+                    </div>
                     <h2>{`Be the first to post a review!`}</h2></>}
 
                   </>

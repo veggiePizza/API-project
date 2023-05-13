@@ -3,11 +3,6 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot, updateSpot } from '../../../store/spots';
 import { useDispatch } from 'react-redux';
-import { addImage } from '../../../store/images';
-import { getSpots } from '../../../store/spots';
-import { readSpot } from '../../../store/spots';
-import CreateImage from '../../Images/CreateImage';
-import { resetSingleSpot } from '../../../store/spots';
 import "./SpotForm.css";
 
 function SpotForm({ spot, formType }) {
