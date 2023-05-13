@@ -109,7 +109,7 @@ const SpotPage = () => {
                     {spot.avgStarRating ? (
                       <>
                         <i class="fa-sharp fa-solid fa-star"></i>
-                        <h6>{`${spot.avgStarRating.toFixed(2)}`}</h6>
+                        <h6>{`${Number(spot.avgStarRating).toFixed(2)}`}</h6>
                         <h2>·</h2>
                         {spot.Reviews.length == 1 ? (
                           <h7>{`1 review`}</h7>
@@ -144,7 +144,7 @@ const SpotPage = () => {
                   <div className='ratingSummary2'>
 
                     <i class="fa-sharp fa-solid fa-star"></i>
-                    <h6>{`${spot.avgStarRating.toFixed(2)}`}</h6>
+                    <h6>{`${Number(spot.avgStarRating).toFixed(2)}`}</h6>
                     {spot.Reviews.length == 1 ? (
                       <h7>{`1 review`}</h7>
                     ) : (
