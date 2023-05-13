@@ -2,3 +2,46 @@
     justify-content: left;
     align-items: flex-end;
 }
+
+
+
+
+.logInForm{
+    width: 400px;
+    height: 300px
+}
+.logInForm >h1{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    margin-top: 18px;
+    
+}
+.logInForm >form > input{
+    font-size: large;
+    margin-left: 15px;
+    width:90%;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.stars{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    color: yellow;
+}
+.submitReview{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    border: 1px solid black;
+    width: 85%;
+    height: 50px;
+    margin-left: 25px;
+    color: white;
+    font-size: larger;
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    box-shadow: 0 0 3px black;
+    line-height: 45px;
+}

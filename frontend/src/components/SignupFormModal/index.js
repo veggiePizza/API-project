@@ -40,6 +40,7 @@ function SignupFormModal() {
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
+            console.log(data)
             setErrors(data.errors);
           }
         });
@@ -48,12 +49,15 @@ function SignupFormModal() {
 
   };
 
-console.log(errors)
   return (
     <div className="logInForm">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        
+
+        {errors && (<>{Object.values(errors).map(i => (
+          <h2 className="errorMessages">{i}</h2>
+        ))}</>)}
+
         <label>
           First Name
           <input

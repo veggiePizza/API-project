@@ -21,7 +21,7 @@ function LoginFormModal() {
     if (credential.length < 4) errors.push('login is required');
     if (password.length < 6) errors.push('pass is required');
     setValidationErrors(errors);
-}, [credential, password ])
+  }, [credential, password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,17 +36,16 @@ function LoginFormModal() {
       );
   };
 
-function demoUser(){
-  console.log("lolol")
-  return dispatch(sessionActions.login({ credential:"Demo-lition", password:"password" }))
-  .then(closeModal)
-}
+  function demoUser() {
+    return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
+      .then(closeModal)
+  }
 
   return (
     <div className="logInForm">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-{errors && <h2>{errors}</h2>}
+        {errors && <h2>{errors}</h2>}
         <label>
           Username or Email
           <input
@@ -65,7 +64,7 @@ function demoUser(){
             required
           />
         </label>
-        {!validationErrors.length ? (<button type="submit" >Log In</button>):(<button type="submit" disabled >Log In</button>)}
+        {!validationErrors.length ? (<button type="submit" >Log In</button>) : (<button type="submit" disabled >Log In</button>)}
         <button onClick={demoUser} >Demo User</button>
       </form>
     </div>
