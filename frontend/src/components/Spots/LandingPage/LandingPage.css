@@ -1,4 +1,147 @@
-@media screen and (min-width: 1130px) {
+@media screen and (max-width: 745px) {
+  .allSpots {
+    padding-top: 100px;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .spotLink {
+    flex: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 7px;
+  }
+  .spotLink>img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 98%;
+    height: 98%;
+    margin-left: 2px;
+
+    border: 1px solid black
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+  }
+
+  .spotLink>h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+
+  .spotLink>h4 {
+    margin: 2px;
+  }
+}
+@media screen and (min-width: 745px) {
+  .allSpots {
+    padding-top: 100px;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .spotLink {
+    flex: 40%;
+    display: flex;
+    flex-direction: column;
+    margin: 7px;
+  }
+  .spotLink>img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 98%;
+    height: 98%;
+    margin-left: 2px;
+
+    border: 1px solid black
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+  }
+
+  .spotLink>h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+
+  .spotLink>h4 {
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .allSpots {
+    padding-top: 100px;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .spotLink {
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 7px;
+  }
+  .spotLink>img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 98%;
+    height: 98%;
+    margin-left: 2px;
+
+    border: 1px solid black
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+  }
+
+  .spotLink>h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+
+  .spotLink>h4 {
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 1128px) {
   .allSpots {
     padding-top: 100px;
     padding-left: 80px;
@@ -69,20 +212,3 @@
 }
 
 
-
-@media screen and (max-height: 800px) {
-  .pokemon-detail-image {
-    height: 200px;
-    flex: 0 0 200px;
-  }
-
-  .pokemon-detail-image-background {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-
-  .pokemon-detail h1 {
-    flex: 1 0 0;
-    margin-top: 0.25em;
-  }
-}

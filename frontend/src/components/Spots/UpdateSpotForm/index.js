@@ -125,15 +125,15 @@ function UpdateSpotForm({ spot, formType }) {
     }
 
     return (
-        <div className='spotForm'>
+        <div className='uspotForm'>
             <h1>Update Your Spot</h1>
             <h2>Where's your place located?</h2>
             <h3>Guests will only get your exact address once they booked a reservation</h3>
 
             <form onSubmit={onSubmit}>
 
-                <div className='spotLocation'>
-                    <div className='country'>
+                <div className='uspotLocation'>
+                    <div className='ucountry'>
                         <label htmlFor='name'>Country</label>
                         <input
                             id='Country'
@@ -143,7 +143,7 @@ function UpdateSpotForm({ spot, formType }) {
                             value={country}
                         />
                     </div>
-                    <div className='address'>
+                    <div className='uaddress'>
                         <label htmlFor='email'>Street Address</label>
                         <input
                             id='address'
@@ -153,7 +153,7 @@ function UpdateSpotForm({ spot, formType }) {
                             value={address}
                         />
                     </div>
-                    <div className='city'>
+                    <div className='ucity'>
                         <label htmlFor='phone'>City</label>
                         <input
                             id='phone'
@@ -163,7 +163,7 @@ function UpdateSpotForm({ spot, formType }) {
                             value={city}
                         />
                     </div>
-                    <div className='state'>
+                    <div className='ustate'>
                         <label htmlFor='comments'>State</label>
                         <textarea
                             id='comments'
@@ -173,7 +173,7 @@ function UpdateSpotForm({ spot, formType }) {
                             value={state}
                         />
                     </div>
-                    <div className='lat'>
+                    <div className='ulat'>
                         <label htmlFor='comments'>Latitude</label>
                         <textarea
                             id='comments'
@@ -183,7 +183,7 @@ function UpdateSpotForm({ spot, formType }) {
                             value={lat}
                         />
                     </div>
-                    <div className='lng'>
+                    <div className='ulng'>
                         <label htmlFor='comments'>Longitude</label>
                         <textarea
                             id='comments'
@@ -195,7 +195,7 @@ function UpdateSpotForm({ spot, formType }) {
                     </div>
                 </div>
 
-                <div className='description'>
+                <div className='udescription'>
                     <label htmlFor='comments'>Describe your place to guests</label>
                     <h1>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h1>
                     <textarea
@@ -281,8 +281,3 @@ function UpdateSpotForm({ spot, formType }) {
 
 export default UpdateSpotForm;
 
-
-/*
-
-
-*/
