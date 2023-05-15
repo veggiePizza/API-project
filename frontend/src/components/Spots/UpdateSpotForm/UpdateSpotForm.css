@@ -1,10 +1,5 @@
-.spotForm{
-    margin-left: 500px;
-    margin-right: 500px;
-    padding-top: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.uspotForm{
+    max-height: 100vh;
 }
 .spotForm > label{
     font-size: medium;

@@ -58,7 +58,6 @@ function SpotForm({ spot, formType }) {
 
 
 
-
         if (formType === "Create Spot") {
             dispatch(createSpot(spot, spotImages))
 
@@ -67,9 +66,6 @@ function SpotForm({ spot, formType }) {
     }
 
     if(idx){
-        console.log("%%%%%")
-        console.log(idx.id)
-        console.log("%%%%%")
         history.push(`/spots/${idx.id}`);
     }
 

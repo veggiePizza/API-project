@@ -11,8 +11,6 @@ const UpdateSpot = (id) => {
     useEffect(() => {
         dispatch(readSpot(id.id));
     }, []);
-    console.log("here")
-    console.log("here")
     if (currSpot) {
         const spot = {
             address: currSpot.address,
@@ -30,7 +28,7 @@ const UpdateSpot = (id) => {
             img4: currSpot.SpotImages[3].url,
             img5: currSpot.SpotImages[4].url,
         }
-
+console.log(spot)
         return (<UpdateSpotForm spot={spot} formType="Update Spot" />
         );
     }

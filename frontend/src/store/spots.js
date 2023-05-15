@@ -44,6 +44,7 @@ export const getSpots = () => async dispatch => {
     }
 };
 export const createSpot = (spot,images) => async dispatch => {
+    console.log(spot)
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
         body: JSON.stringify(spot)
@@ -69,7 +70,7 @@ export const readSpot = (id) => async dispatch => {
     }
 };
 export const updateSpot = (id, spot) => async dispatch => {
-    const response = await fetch(`/api/spots/${id}`, {
+    const response = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT',
         body: JSON.stringify(spot)
     });
