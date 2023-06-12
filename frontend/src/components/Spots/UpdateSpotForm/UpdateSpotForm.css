@@ -1,82 +1,74 @@
-.uspotForm{
-    max-height: 100vh;
+.spotForm > h1{
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
 }
-.spotForm > label{
-    font-size: medium;
+.spotForm h2{
+    font-weight: bolder;
+    font-size: larger;
+    margin-top: 10px;
 }
-.spotLocation{
+.spotForm h3{
+    font-size:smaller;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+.spotForm h4{
+    font-size:smaller;
+    margin: 0px;
+    margin-right: 5px;
+}
+.spotForm label{
+    font-size: smaller;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.spotForm input, textarea{
+    color: white;
+    background-image:linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    font-size: smaller;
+    border: 2px solid black;
+    width: 100%;
+    height: 15px;
+}
+.spotLocation, .descriptionUpdate, .spotTitle, .spotPrice, .spotPhotos{
     border-bottom: solid 1px black;
     padding-bottom: 15px;
+}
+.spotForm .submitUpdate{
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
 }
-.country{
-    width: 100%;
+.submitUpdate > button{
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    border-radius: 6px;
+    margin: 20px;
+    color: white;
+    font-size: small;
+    padding: 5px;
+  }
 
+.spotDescription textarea{
+    height: 150px;
 }
-.country > input{
-    width: 100%;
-    
+.spotPrice > div{
+    display: flex;
+    align-items: center;
 }
-.address{
-    width: 100%;
 
-}
-.address > input{
+
+.country, .address{
     width: 100%;
-    
 }
+
 .city{
     width: 60%;
 
 }
-.city > input{
-    width: 100%;
-    
+.state{
+    width: 40%;
 }
-
-.lat{
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-}
-.lat > input{
-    width: 100%;
-    
-}
-.lng{
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-}
-
-.name{
-    width:98%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-label{
-    display: flex;
-}
-.description{
-    display: flex;
-    flex-direction: column;
-}
-.photoLinks{
-    display: flex;
-    flex-direction: column;
-}
-.title > label{
-    font-size: x-large;
-}
-.title > h1{
-    font-size: small;
-}.title > textarea{
-    width: 98%;
+.lat, .lng{
+    width: 50%;
 }

@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { addImage } from "./images";
+import { addImage, updateImage, deleteImage } from "./images";
 
 const LOAD = 'spots/LOAD';
 const CREATE = 'spots/CREATE';
@@ -54,11 +54,9 @@ export const createSpot = (spot,images) => async dispatch => {
         dispatch(createOneSpot(newSpot))
 
         images.forEach(img => {
-            dispatch(addImage(newSpot.id,img))
+            if(img)
+                dispatch(addImage(newSpot.id,img))
         });
-    
-
-
     }
 }
 
@@ -69,16 +67,25 @@ export const readSpot = (id) => async dispatch => {
         dispatch(readOneSpot(spot));
     }
 };
-export const updateSpot = (id, spot) => async dispatch => {
+
+export const updateSpot = (id, spot, images) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT',
         body: JSON.stringify(spot)
     });
+    
     if (response.ok) {
-        const spot = await response.json();
-        dispatch(updateOneSpot(spot));
+        images.forEach(img => {
+            if(img.url){
+                if(img.id) dispatch(updateImage(img.id, img.url))
+                else dispatch(addImage(id,img.url))
+            }else if(img.id) dispatch(deleteImage(img.id))
+        });
     }
+    dispatch(readSpot(id))
 };
+
+
 export const deleteSpot = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`, {
         method: 'DELETE',

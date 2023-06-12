@@ -8,7 +8,7 @@ import LoginFormModal from "./components/LoginFormModal";
 import SpotPage from "../src/components/Spots/SpotPage"
 import LandingPage from "../src/components/Spots/LandingPage"
 import SpotsManagement from "./components/Spots/SpotsManagement";
-
+import UpdateSpot from "./components/Spots/UpdateSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ function App() {
             <Route exact path='/spots/current' component={SpotsManagement} />
             <Route exact path='/spots/new' component={CreateSpot} />
             <Route exact path='/spots/:id' component={SpotPage} />
+            <Route exact path='/spots/:id/edit' component={UpdateSpot} />
             <Route exact path="/login" component={LoginFormModal}/> 
           </Switch>
 

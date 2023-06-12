@@ -128,7 +128,7 @@ const authReview = async function (req, _res, next) {
   return next(err);
 }
 
-const authDeleteSpotImage = async function (req, res, next) {
+const authModifySpotImage = async function (req, res, next) {
   const spotImage = await SpotImage.findByPk(req.params.id);
   if (spotImage) {
     const spot = await Spot.findByPk(spotImage.spotId);
@@ -245,7 +245,7 @@ module.exports = {
   authDeleteBooking,
   authDeleteReviewImage,
   authReview,
-  authDeleteSpotImage,
+  authModifySpotImage,
   authIsSpot,
   authIsSpotNot,
   authUser,

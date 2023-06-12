@@ -1,0 +1,51 @@
+.signUpForm{
+    width: 400px;
+    height: 300px;
+}
+.signUpForm2{
+    width: 400px;
+    height: 350px;
+}
+.signUpForm > h1, .signUpForm2 > h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+    font-size: x-large;
+    
+}
+.formInput{
+    display: flex;
+    flex-direction: column;
+}
+.formInput input{
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    border: 2px solid black;
+}
+.formInput button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    border: 1px solid black;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: white;
+    font-size: large;
+    box-shadow: 0 0 3px black;
+}
+.formInput button:enabled{
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+}
+.formInput button:disabled{
+    background-image: linear-gradient(to right, rgb(63, 63, 63) , rgb(107, 106, 106));
+}
+.errorMessages{
+    margin-left: 15px;
+    margin-right: 15px;
+    color: red;
+    font-size: small;
+}

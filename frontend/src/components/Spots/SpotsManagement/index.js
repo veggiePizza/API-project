@@ -29,7 +29,7 @@ const SpotsManagement = () => {
 
           {Object.values(spots).map(({ id, name, city, state, price, previewImage, avgRating }) => (
             <>
-            
+
               <NavLink className='spotLink' to={`/spots/${id}`}>
                 <h2>{name}</h2>
                 <img src={`${previewImage}`}></img>
@@ -49,12 +49,15 @@ const SpotsManagement = () => {
               </NavLink>
               <div>
 
-                <div className='deleteButton'>
-                  <OpenModalButton className='updateSpotButton'
-                    buttonText="Update"
-                    modalComponent={<UpdateSpot id={id} />}
-                  /></div>
-                <div className='updateButton'>  <OpenModalButton className='deleteSpotButton'
+                <NavLink to={`/spots/${id}/edit`}>
+                  <button className='updateButton'>
+                    Update
+                  </button>
+                </NavLink>
+
+
+
+                <div className='deleteButton'>  <OpenModalButton className='deleteSpotButton'
                   buttonText="Delete"
                   modalComponent={<DeleteSpot id={id} />}
                 /></div>

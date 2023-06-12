@@ -3,16 +3,20 @@ import { useDispatch } from 'react-redux';
 import { readSpot } from "../../../store/spots";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
-const UpdateSpot = (id) => {
+const UpdateSpot = () => {
+    const { id } = useParams();
     const currSpot = useSelector(state => state.spots.spot);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(readSpot(id.id));
+        dispatch(readSpot(id));
     }, []);
+
     if (currSpot) {
         const spot = {
+            id: currSpot.id,
             address: currSpot.address,
             city: currSpot.city,
             state: currSpot.state,
@@ -21,16 +25,15 @@ const UpdateSpot = (id) => {
             lng: currSpot.lng,
             name: currSpot.name,
             description: currSpot.description,
-            price: currSpot.price,
-            mainImg: currSpot.SpotImages[0].url,
-            img2: currSpot.SpotImages[1].url,
-            img3: currSpot.SpotImages[2].url,
-            img4: currSpot.SpotImages[3].url,
-            img5: currSpot.SpotImages[4].url,
+            price: currSpot.price
         }
-console.log(spot)
-        return (<UpdateSpotForm spot={spot} formType="Update Spot" />
-        );
+
+        const spotImages = currSpot.SpotImages;
+        for (let i = currSpot.SpotImages.length; i < 5; i++) {
+            spotImages.push({ id: null, url: "" })
+        }
+        
+        return (<UpdateSpotForm spot={spot} spotImages={spotImages} />);
     }
 }
 
