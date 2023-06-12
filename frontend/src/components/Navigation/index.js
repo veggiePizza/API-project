@@ -14,9 +14,9 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/"><img className="nav-logo" src={logo}></img></NavLink>
       </div>
       <div>
+        {sessionUser && <><NavLink className="create-spot-link" exact to="/spots/new">Airbnb your home</NavLink></>}
         {isLoaded && (<>
-          {sessionUser && <><NavLink className="create-spot-link" exact to="/spots/new">Airbnb your home</NavLink></>}
-          <ProfileButton classsName="menuButton" user={sessionUser} />
+          <ProfileButton user={sessionUser} />
         </>)}
       </div>
     </div>

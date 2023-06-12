@@ -18,9 +18,7 @@ const CreateSpot = () => {
         price: ''
     }
 
-    return (
-        <SpotForm spot={spot} formType="Create Spot" />
-    );
+    return (<SpotForm spot={spot} />);
 }
 
 export default CreateSpot;

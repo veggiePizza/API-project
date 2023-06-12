@@ -1,32 +1,25 @@
 * {
     font-family: 'Montserrat', sans-serif;
 }
-
 .nav {
+    margin-left: 20px;
+    margin-right: 2000px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     position: absolute;
     border-bottom: solid grey .5px;
-    width: 100%;
-    height: 8%;
-    position: absolute;
+    width: 1400px;
+    height: 50px;
 }
 
-.nav>div {
+.nav>* {
     display: flex;
 }
 
 .nav-logo {
     width: 90px;
     height: auto;
-    display: flex;
-    align-items: center;
-}
-
-.menuButton {
-    display: flex;
     align-items: center;
 }
 
@@ -36,67 +29,64 @@
     align-items: center;
 }
 
-.menuList {
+.userMenu {
     display: flex;
-    flex-direction: column;
-    margin: 20px;
-    padding: 10px;
-}
+    justify-content: center;
+    align-items: center;
 
-.menuList {
-    margin-top: 55px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background: white;
 }
-
-.firstLiMenu {
-    margin-top: -10px;
-}
-
 .seperator {
-    border-bottom: solid grey .5px;
-}
-li{
-    padding: 1px;
-}
-
-ul {
-    list-style-type: none;
+    border-bottom: solid grey 1px;
+    padding-bottom: 2px;
 }
 
 a {
     text-decoration: none;
 }
 
-.logoutButton {
-    background: #ff385d;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 5px;
-    margin-left: 25px;
-    padding:3px;
-    margin-bottom: -5px;
-    color: white;
-    font-size:small;
+ul {
+    list-style-type: none;
 }
-.manageSpots{
-    background: #ff385d;
+
+.menuList,
+.menuList2 {
+    padding: 10px;
+    padding-bottom: 5px;
     border: 1px solid black;
     border-radius: 10px;
-    margin-top: 5px;
-    margin-left: 25px;
-    padding:3px;
-    margin-bottom: -5px;
-    color: white;
-    font-size:small;
+    background: white;
 }
-.menuButton{
-    background: #ff385d;
+
+.menuList {
+    margin-top: 20px;
+}
+
+.menuList2 {
+    margin-top: 90px;
+}
+
+.menuList>*, .menuList2>* {
+    margin: 5px;
+    font-size: smaller;
+    display: flex;
+    justify-content: center;
+}
+
+.manageSpots, .logoutButton, .menuList > *{
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
     border: 1px solid black;
     border-radius: 10px;
-    margin: 3px;
-    padding:3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     color: white;
-    font-size:small;
+    font-size: smaller;
+    width: 100%;
+}
+.logoutButton{
+    background-image: linear-gradient(to right, rgb(63, 63, 63) , rgb(107, 106, 106));
+}
+.menuList button{
+    width: 70px;
 }

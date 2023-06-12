@@ -1,10 +1,5 @@
-.spotsManagement{
-    padding-top: 80px;
-    margin-left: 100px;
-    margin-right: 100px;
-    display:flex;
-    flex-direction: column;
-}
+
+
 
 .deleteButton, .updateButton{
     display: flex;
