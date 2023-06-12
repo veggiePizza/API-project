@@ -1,9 +1,28 @@
 
+.spotsManagement > h1{
+  padding-top: 70px;
+  padding-left: 80px;
+  margin-bottom: 10px;
+}
+.createNewButton{
+  margin-left: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size:medium;
+}
 
-
-.deleteButton, .updateButton{
+.updateButton{
     display: flex;
     background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    border-radius: 4px;
+    width: 60px;
+    height: 20px;
+  }
+  .deleteButton{
+    display: flex;
+    background-image: linear-gradient(to right, rgb(63, 63, 63) , rgb(107, 106, 106));
     border-radius: 4px;
     width: 60px;
     height: 20px;
@@ -18,7 +37,14 @@
     margin-left: 2px;
     font-size: small;
   }
-  
+  .createNewButton{
+    display: flex;
+    background-image: linear-gradient(to right, rgb(227, 35, 81) , rgb(224, 34, 97));
+    border-radius: 4px;
+    width: 200px;
+    height: 35px;
+  }
+
   .updateButton > *{
     display: flex;
     justify-content: center;
