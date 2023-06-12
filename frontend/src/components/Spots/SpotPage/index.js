@@ -83,7 +83,7 @@ const SpotPage = () => {
 
               }
                 <div className="sidePictures">
-                  {spot.SpotImages && (<>{Object.values(spot.SpotImages).map(({ id,url }) => (
+                  {spot.SpotImages && (<>{Object.values(spot.SpotImages).map(({ id, url }) => (
                     <>
                       {spot.SpotImages[0].id != id && <img className="pictures" src={url}></img>}
                     </>
@@ -183,10 +183,9 @@ const SpotPage = () => {
                             />
                           </div>
                         )}</>}
+
                     </div>
                   ))}
-
-
                 </ol>
 
 
@@ -194,6 +193,10 @@ const SpotPage = () => {
               </>
             ) : (
               <>
+                <div className="ratingSummary">
+                  <i class="fa-sharp fa-solid fa-star"></i>
+                  <h6>New</h6>
+                </div>
                 {sessionUser ? (
                   <> {allowPost && <><i class="fa-sharp fa-solid fa-star"></i>
                     <h6>New</h6>

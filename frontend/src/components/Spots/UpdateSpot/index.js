@@ -14,7 +14,7 @@ const UpdateSpot = () => {
         dispatch(readSpot(id));
     }, []);
 
-    if (currSpot) {
+    if (currSpot && currSpot.id == id) {
         const spot = {
             id: currSpot.id,
             address: currSpot.address,

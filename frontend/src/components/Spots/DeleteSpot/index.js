@@ -11,7 +11,6 @@ function DeleteSpot(id){
 
     if (confirm === "delete") {
         dispatch(deleteSpot(id.id)).then(closeModal);
-        console.log("hey what is going on literally")
         dispatch(getUserSpots())
     }
     else if (confirm === "keep") {
