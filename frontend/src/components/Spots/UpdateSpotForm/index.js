@@ -10,9 +10,10 @@ import CreateImage from '../../Images/CreateImage';
 import { resetSingleSpot } from '../../../store/spots';
 import "./UpdateSpotForm.css";
 
-function UpdateSpotForm({ spot, formType }) {
-    const idx = useSelector(state => state.spots.spot);
+function UpdateSpotForm({ spot, spotImages }) {
+    //const idx = useSelector(state => state.spots.spot);
     const history = useHistory();
+    const idx = spot.id
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
@@ -22,11 +23,11 @@ function UpdateSpotForm({ spot, formType }) {
     const [name, setName] = useState(spot.name);
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
-    const [mainImg, setMainImg] = useState('');
-    const [img2, setImg2] = useState('');
-    const [img3, setImg3] = useState('');
-    const [img4, setImg4] = useState('');
-    const [img5, setImg5] = useState('');
+    const [mainImg, setMainImg] = useState(spotImages[0].url);
+    const [img2, setImg2] = useState(spotImages[1].url);
+    const [img3, setImg3] = useState(spotImages[2].url);
+    const [img4, setImg4] = useState(spotImages[3].url);
+    const [img5, setImg5] = useState(spotImages[4].url);
     const [validationErrors, setValidationErrors] = useState([]);
     const [successfulSubmit, setSuccessfullSubmit] = useState(false);
     const [postErrors, setPostErrors] = useState([]);
@@ -53,231 +54,150 @@ function UpdateSpotForm({ spot, formType }) {
 
 
     const onSubmit = e => {
-        
+
         e.preventDefault();
         setSuccessfullSubmit(false)
         //if (validationErrors.length) return alert(`Cannot Submit`);
 
-        spot = { ...spot, address, city, state, country, lat, lng, name, description, price };
-        const spotImages = [mainImg, img2, img3, img4, img5]
-
-        const spot2={
-            address: "1542 Some Address",
-            city: "San Francisco",
-            country: "United States",
-            description: "Place where web developers are created",
-            lat: "37.7645358",
-            lng: "122.4730327",
-            name: "App Academy",
-            price: "123",
-            state: "California"
-        }
-
-        const spotImages2 =["https://www.science.org/do/10.1126/science.abd8020/abs/frog_1280p_0.jpg",
-    "https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
-"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
-"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg",
-"https://media.australian.museum/media/dd/images/Some_image.width-1600.4c73ba1.jpg"]
-
-        if (formType === "Update Spot") {
-            dispatch(updateSpot(spot))
-            /*dispatch(addImage(newId, spotImg))*/
-
-        }
-
-    
-
-
-        //history.push(`/spots/${spot.id}`);
-
-
-        /* const contactUsInformation = {
-           name,
-           email,
-           phone,
-           phoneType,
-           comments,
-           submittedOn: new Date()
-         };*/
-
-        // Ideally, we'd persist this information to a database using a RESTful API.
-        // For now, though, just log the contact us information to the console.
-        //console.log(contactUsInformation);
-        /*
-            // Reset the form state.
-            setName('');
-            setEmail('');
-            setPhone('');
-            setPhoneType('');
-            setComments('');
-            //!!START SILENT
-            setValidationErrors([]);
-            setHasSubmitted(false);*/
-        //!!END
+        const updatedSpot = { address, city, state, country, lat, lng, name, description, price };
+        const updatedImages = [{ id: spotImages[0].id, url: mainImg },
+        { id: spotImages[1].id, url: img2 },
+        { id: spotImages[2].id, url: img3 },
+        { id: spotImages[3].id, url: img4 },
+        { id: spotImages[4].id, url: img5 }]
+        dispatch(updateSpot(idx, updatedSpot, updatedImages))
+        history.push(`/spots/${idx}`);
 
     }
-
-    if(idx){
-        console.log("%%%%%")
-        console.log(idx.id)
-        console.log("%%%%%")
-        history.push(`/spots/${idx.id}`);
-    }
-
     return (
-        <div className='uspotForm'>
+        <div className='spotForm'>
             <h1>Update Your Spot</h1>
             <h2>Where's your place located?</h2>
-            <h3>Guests will only get your exact address once they booked a reservation</h3>
-
+            <h3>Guests will only get your exact address once they booked a reservation.</h3>
             <form onSubmit={onSubmit}>
-
-                <div className='uspotLocation'>
-                    <div className='ucountry'>
-                        <label htmlFor='name'>Country</label>
+                <div className='spotLocation'>
+                    <div className='country'>
+                        <label >Country</label>
                         <input
-                            id='Country'
                             placeholder="Country"
                             type='text'
                             onChange={e => setCountry(e.target.value)}
                             value={country}
                         />
                     </div>
-                    <div className='uaddress'>
-                        <label htmlFor='email'>Street Address</label>
+                    <div className='address'>
+                        <label >Street Address</label>
                         <input
-                            id='address'
                             placeholder="Address"
                             type='text'
                             onChange={e => setAddress(e.target.value)}
                             value={address}
                         />
                     </div>
-                    <div className='ucity'>
-                        <label htmlFor='phone'>City</label>
+                    <div className='city'>
+                        <label>City</label>
                         <input
-                            id='phone'
                             placeholder="City"
                             type='text'
                             onChange={e => setCity(e.target.value)}
                             value={city}
                         />
                     </div>
-                    <div className='ustate'>
-                        <label htmlFor='comments'>State</label>
-                        <textarea
-                            id='comments'
+                    <div className='state'>
+                        <label >State</label>
+                        <input
                             placeholder="STATE"
-                            name='comments'
+                            type='text'
                             onChange={e => setState(e.target.value)}
                             value={state}
                         />
                     </div>
-                    <div className='ulat'>
-                        <label htmlFor='comments'>Latitude</label>
-                        <textarea
-                            id='comments'
+                    <div className='lat'>
+                        <label>Latitude</label>
+                        <input
                             placeholder="Latitude"
-                            name='comments'
+                            type='text'
                             onChange={e => setLat(e.target.value)}
                             value={lat}
                         />
                     </div>
-                    <div className='ulng'>
-                        <label htmlFor='comments'>Longitude</label>
-                        <textarea
-                            id='comments'
+                    <div className='lng'>
+                        <label >Longitude</label>
+                        <input
                             placeholder="Longitude"
-                            name='comments'
+                            type='text'
                             onChange={e => setLng(e.target.value)}
                             value={lng}
                         />
                     </div>
                 </div>
-
-                <div className='udescription'>
-                    <label htmlFor='comments'>Describe your place to guests</label>
-                    <h1>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h1>
+                <div className='spotDescription'>
+                    <h2>Describe your place to guests</h2>
+                    <h3>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h3>
                     <textarea
-                        id='comments'
                         placeholder="Description"
-                        name='comments'
                         onChange={e => setDescription(e.target.value)}
                         value={description}
                     />
                 </div>
-                <div>
-                    <label htmlFor='comments'>Create a title for your spot</label>
-                    <h1>Catch guests' attention with a spot title that highlights what makes your place special.</h1>
+                <div className='spotTitle'>
+                    <h2>Create a title for your spot</h2>
+                    <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
                     <textarea
-                        id='comments'
                         placeholder="Name of your spot"
-                        name='comments'
                         onChange={e => setName(e.target.value)}
                         value={name}
                     />
                 </div>
-
-                <div>
-                    <label htmlFor='comments'>Set a base price for your spot</label>
-                    <h1>Competitive pricing can help your listing stand out and rank higher in search results.</h1>
-                    <textarea
-                        id='comments'
-                        placeholder="Price per night (USD)"
-                        name='comments'
-                        onChange={e => setPrice(e.target.value)}
-                        value={price}
-                    />
+                <div className='spotPrice'>
+                    <h2>Set a base price for your spot</h2>
+                    <h3>Competitive pricing can help your listing stand out and rank higher in search results.</h3>
+                    <div>
+                        <h4>$</h4>
+                        <textarea
+                            placeholder="Price per night (USD)"
+                            name='comments'
+                            onChange={e => setPrice(e.target.value)}
+                            value={price}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor='comments'>Liven up your spot with photos</label>
-                    <h1>Submit a link to at least one photo to publish your spot.</h1>
+                <div className='spotPhotos'>
+                    <h2>Liven up your spot with photos</h2>
+                    <h3>Submit a link to at least one photo to publish your spot.</h3>
                     <textarea
-                        id='comments'
                         placeholder="Preview Image URL"
-                        name='comments'
                         onChange={e => setMainImg(e.target.value)}
                         value={mainImg}
                     />
-
                     <textarea
-                        id='comments'
                         placeholder="Image URL"
-                        name='comments'
                         onChange={e => setImg2(e.target.value)}
                         value={img2}
                     />
                     <textarea
-                        id='comments'
                         placeholder="Image URL"
-                        name='comments'
                         onChange={e => setImg3(e.target.value)}
                         value={img3}
                     />
                     <textarea
-                        id='comments'
                         placeholder="Image URL"
-                        name='comments'
                         onChange={e => setImg4(e.target.value)}
                         value={img4}
                     />
                     <textarea
-                        id='comments'
                         placeholder="Image URL"
-                        name='comments'
                         onChange={e => setImg5(e.target.value)}
                         value={img5}
                     />
-
-
-
                 </div>
-
-                <button type="submit">Update Your Spot</button>
+                <div className='submitUpdate'>
+                    <button>Update Spot</button>
+                </div>
             </form>
         </div>
     );
+
 }
 
 export default UpdateSpotForm;
-

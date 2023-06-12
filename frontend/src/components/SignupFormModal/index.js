@@ -6,119 +6,98 @@ import './SignupForm.css';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const [formSize, setFormSize] = useState("signUpForm");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [backendErrors, setbackendErrors] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
   const { closeModal } = useModal();
 
-
   useEffect(() => {
-    setErrors(false);
     const errors = [];
-    if (firstName.length < 4) errors.push('first name is required');
-    if (!lastName.length) errors.push('last name is required');
-    if (!email.length) errors.push('email is required');
-    if (username.length < 4) errors.push('valid username is required');
-    if (password.length < 6) errors.push('valid password is required');
-    if (!confirmPassword.length) errors.push('confirm password is required');
-    if (password != confirmPassword) errors.push('Confirm Password field must be the same as the Password field');
+    if (firstName.length < 4) errors.push('First name is required.');
+    if (!lastName.length) errors.push('Last name is required.');
+    if (!email.length) errors.push('Email is required.');
+    if (username.length < 4) errors.push('Valid username is required.');
+    if (password.length < 6) errors.push('Valid password is required.');
+    if (!confirmPassword.length) errors.push('Confirm password is required.');
+    if (password != confirmPassword) errors.push('Confirm Password field must be the same as the Password field.');
     setValidationErrors(errors);
   }, [firstName, lastName, email, username, password, confirmPassword])
 
   const handleSubmit = (e) => {
-    setErrors(false);
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) {
-            console.log(data)
-            setErrors(data.errors);
-          }
-        });
-    }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    const errors = [];
 
+    dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+       .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setbackendErrors(data.errors)
+          setFormSize("signUpForm2")
+        }
+      });
   };
 
+  const hidePassword = (password) => {
+    let str = ""
+    for (let i = 0; i < password.length; i++)
+      str += "*";
+    return str;
+  }
+
   return (
-    <div className="logInForm">
+    <div className={formSize}>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-
-        {errors && (<>{Object.values(errors).map(i => (
+        {backendErrors && (<>{Object.values(backendErrors).map(i => (
           <h2 className="errorMessages">{i}</h2>
         ))}</>)}
 
-        <label>
-          First Name
+        <div className="formInput">
           <input
-            type="text"
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Last Name
           <input
-            type="text"
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Email
           <input
-            type="text"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Username
           <input
-            type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
           <input
-            type="password"
             placeholder="Password"
-            value={password}
+            value={hidePassword(password)}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Confirm Password
           <input
-            type="password"
             placeholder="Confirm Password"
-            value={confirmPassword}
+            value={hidePassword(confirmPassword)}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        {!validationErrors.length ? (<button type="submit" >Sign Up</button>) : (<button type="submit" disabled >Sign Up</button>)}
+          {!validationErrors.length ? (<button>Sign Up</button>) : (<button disabled >Sign Up</button>)}
+        </div>
       </form>
     </div>
   );

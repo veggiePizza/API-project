@@ -83,9 +83,9 @@ const SpotPage = () => {
 
               }
                 <div className="sidePictures">
-                  {spot.SpotImages && (<>{Object.values(spot.SpotImages).map(({ url }) => (
+                  {spot.SpotImages && (<>{Object.values(spot.SpotImages).map(({ id,url }) => (
                     <>
-                      {spot.SpotImages[0].url != url && <img className="pictures" src={url}></img>}
+                      {spot.SpotImages[0].id != id && <img className="pictures" src={url}></img>}
                     </>
                   ))}</>)}
                 </div>

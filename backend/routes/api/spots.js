@@ -118,32 +118,32 @@ router.get('/', validateQuery, async (req, res) => {
   if (Number.isNaN(size)) size = 20;
   const where = {};
 
-    if (minLat) where.lat = {[Op.gte]:minLat};
-    if (maxLat) where.lat = {[Op.lte]:maxLat};
-    if (minLng) where.lng = {[Op.gte]:minlng};
-    if (maxLng) where.lng = {[Op.lte]:maxLng};
-    if (minPrice) where.price = {[Op.gte]:minPrice};
-    if (maxPrice) where.price = {[Op.lte]:maxPrice};
+  if (minLat) where.lat = { [Op.gte]: minLat };
+  if (maxLat) where.lat = { [Op.lte]: maxLat };
+  if (minLng) where.lng = { [Op.gte]: minlng };
+  if (maxLng) where.lng = { [Op.lte]: maxLng };
+  if (minPrice) where.price = { [Op.gte]: minPrice };
+  if (maxPrice) where.price = { [Op.lte]: maxPrice };
 
-    const spots = await Spot.findAll({
-      where,
-      attributes: {
-        include: [
-          [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-          [Sequelize.literal(
-            `(SELECT url FROM ${schema ? `"${schema}"."SpotImages"` : 'SpotImages'
-            } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
-          ), 'previewImage'],
-        ]
-      },
-      include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
-      group: "Spot.id",
-      limit: size,
-      offset: (page - 1) * size,
-      subQuery: false
-    });
-    if (spots) return res.status(200).json({ Spots: spots, page, size });
+  const spots = await Spot.findAll({
+    where,
+    attributes: {
+      include: [
+        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+        [Sequelize.literal(
+          `(SELECT url FROM ${schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+          } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+        ), 'previewImage'],
+      ]
+    },
+    include: [{ model: Review, attributes: [] }, { model: SpotImage, attributes: [] }],
+    group: "Spot.id",
+    limit: size,
+    offset: (page - 1) * size,
+    subQuery: false
   });
+  if (spots) return res.status(200).json({ Spots: spots, page, size });
+});
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
@@ -187,6 +187,8 @@ router.get('/:id', async (req, res) => {
       { model: SpotImage, attributes: ['id', 'url', 'preview'] },
       { model: User, attributes: ['id', 'firstName', 'lastName'], as: "Owner" }
     ],
+    order: [[{ model: SpotImage }, 'id', 'ASC'],
+    [{ model: Review }, 'updatedAt', 'DESC']]
   });
   if (spot) return res.status(200).json(spot);
   return res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 })
@@ -241,7 +243,7 @@ router.get('/:id/reviews', async (req, res) => {
       ],
       order: [['updatedAt', 'DESC']]
     });
-    return res.status(200).json({Reviews: reviews});
+    return res.status(200).json({ Reviews: reviews });
   }
   else res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 });
 });
@@ -252,9 +254,9 @@ router.post('/:id/reviews', requireAuth, validateReview, async (req, res) => {
   const { user } = req;
   const spot = await Spot.findByPk(req.params.id);
   if (spot) {
-    const checkExistingReviews = await Review.findOne({ where: { spotId: req.params.id, userId: user.id  } });
+    const checkExistingReviews = await Review.findOne({ where: { spotId: req.params.id, userId: user.id } });
     if (checkExistingReviews)
-      return res.status(403).json({ message: "User already has a review for this spot", statusCode: 403});
+      return res.status(403).json({ message: "User already has a review for this spot", statusCode: 403 });
     const newReview = await Review.create({ review, stars, userId: user.id, spotId: spot.id, createdAt: new Date(), updatedAt: new Date() })
     if (newReview) return res.status(201).json(newReview);
   }
